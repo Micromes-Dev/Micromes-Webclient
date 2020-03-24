@@ -1,6 +1,7 @@
 <template>
    <div id="app">
       <Nav/>
+      
       <router-view/>
       <h1>hi</h1>
    </div>
@@ -22,5 +23,13 @@ export default class Messenger extends Vue {}
 #app{
    font-family: Avenir, Helvetica, Arial, sans-serif;
    color: rgb(66, 219, 66);
+}
+
+* {
+    padding: 0;
+    margin: 0.1%;
+    font-family: 'Ubuntu', sans-serif;
+    color: white;
+    text-decoration: none;
 }
 </style>
