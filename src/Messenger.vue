@@ -9,6 +9,7 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
+import { graphql, buildSchema } from 'graphql';
 import Nav from './components/Nav.vue';
 
 @Component({
