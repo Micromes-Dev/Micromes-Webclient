@@ -1,7 +1,7 @@
 <template>
    <div id="app">
       <Nav/>
-      
+      <div>{{name}}</div>
       <router-view/>
       <h1>hi</h1>
    </div>
@@ -9,15 +9,29 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import { graphql, buildSchema } from 'graphql';
+//import { graphql, buildSchema } from 'graphql';
 import Nav from './components/Nav.vue';
+import VueCookies from 'vue-cookies-ts';
+
 
 @Component({
   components: {
      Nav,
   },
 })
-export default class Messenger extends Vue {}
+export default class Messenger extends Vue {
+   name = []
+
+   onLogin(): void{
+      
+      this.name = this.$cookies.keys();
+   }
+
+   mounted(){
+      Vue.use(VueCookies);
+      this.onLogin();
+   }
+}
 </script>
 
 <style>

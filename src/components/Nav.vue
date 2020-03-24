@@ -4,13 +4,15 @@
          <div id="left" class="column">
             <ul>
                <router-link to="/" class="nav_element">Home</router-link>
-               <router-link to="/releases" class="nav_element">Releases</router-link>
+               <router-link to="/graphql" class="nav_element">GraphQL</router-link>
+               <a href="/login">Login</a>
             </ul>
          </div>
       <div id="right" class="column">
          <ul>
             <router-link to="/myaccount" class="nav_element account" v-if="loggedIn">Your Account</router-link>
             <router-link to="/signin" class="nav_element account" v-else>Sign in</router-link>
+            
          </ul>
       </div>
     </div>
