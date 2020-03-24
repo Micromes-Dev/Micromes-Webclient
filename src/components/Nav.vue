@@ -1,12 +1,19 @@
 <template>
    <nav class="sticky">
-      <ul>
-        <router-link to="/" class="nav_element">Home</router-link>
-        <router-link to="/releases" class="nav_element">Releases</router-link>
-          
-        <router-link to="/myaccount" class="nav_element account" v-if="loggedIn">Your Account</router-link>
-        <router-link to="/signin" class="nav_element account" v-else>Sign in</router-link>
-      </ul>
+      <div name="table" class="content">
+         <div id="left" class="column">
+            <ul>
+               <router-link to="/" class="nav_element">Home</router-link>
+               <router-link to="/releases" class="nav_element">Releases</router-link>
+            </ul>
+         </div>
+      <div id="right" class="column">
+         <ul>
+            <router-link to="/myaccount" class="nav_element account" v-if="loggedIn">Your Account</router-link>
+            <router-link to="/signin" class="nav_element account" v-else>Sign in</router-link>
+         </ul>
+      </div>
+    </div>
     </nav>
 </template>
 
@@ -16,6 +23,7 @@ import { Component, Vue } from 'vue-property-decorator';
 @Component
 export default class Nav extends Vue {
    loggedIn: boolean = false;
+   username: string = "";
 }
 </script>
 
@@ -31,8 +39,8 @@ export default class Nav extends Vue {
 
 nav{
     background-color: rgba(17,17,17,0.5);
-    padding-bottom: 20px;
-    padding-top: 20px;
+    padding-bottom: 10px;
+    padding-top: 10px;
     width: 100%;
     list-style: none;
     margin-top: -4.5%;
@@ -64,5 +72,28 @@ nav{
     -ms-box-sizing: border-box;
     box-sizing: border-box;
     overflow: visible;
+}
+
+.content{
+    color: white;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 90% 10%;
+}
+
+.account{
+   
+}
+
+.column{
+    display: inline-grid;
+}
+
+#left{
+    
+}
+
+#right{
+  
 }
 </style>
