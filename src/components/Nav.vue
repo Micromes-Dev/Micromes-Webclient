@@ -51,9 +51,11 @@ export default class Nav extends Vue {
   }
 
     authorizationHeader(id_token: String){
-        axios.defaults.headers.common['Authorization'] = `Bearer ${id_token}`
-        axios.post("http://micromesauthredirect.net:8090/login", {"action" : "dashboard"}, {
-            
+        axios.defaults.headers.common['Authorization'] = `Bearer ${id_token}`;
+        axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
+        axios.defaults.headers.common['Access-Control-Allow-Methods'] = 'GET, POST, PATCH, PUT, DELETE, OPTIONS';
+        axios.defaults.headers.common['Access-Control-Allow-Headers'] = 'Origin, Content-Type, X-Auth-Token';
+        axios.post("http://micromesauthredirect.net:8080/api", {"action" : "dashboard"}, {
         })
         .then(function (response){
             console.log(response);
