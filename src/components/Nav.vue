@@ -21,43 +21,68 @@
          </ul>
       </div>
     </div>
-    <!-- Errors -->
-    <div v-if=response class="text-red"><p>{{response}}</p></div>
     </nav>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import GoogleAuth from 'vue-google-oauth';
+import VueSessionStorage from 'vue-sessionstorage';
+const axios = require('axios');
 
 @Component
 export default class Nav extends Vue {
    loggedIn: boolean = false;
-   response: String = '';
+   id_token: string = '';
 
-   onSignIn(googleUser){
+  mounted(){
+      //init important libs
+    Vue.use(VueSessionStorage)
+    Vue.use(GoogleAuth, { client_id: '1025113353398-pb40di8kma99osibf68j8ov8fqvddr96.apps.googleusercontent.com' });
+    //init google auth
+    Vue.googleAuth().load();
+    Vue.googleAuth().directAccess();
+    this.id_token = sessionStorage.getItem('id_token');
+    console.log(this.id_token);
+    if(this.id_token){
+        this.loggedIn = true;
+    }
+    this.authorizationHeader(this.id_token);
+  }
+
+    authorizationHeader(id_token: String){
+        axios.defaults.headers.common['Authorization'] = `Bearer ${id_token}`
+        axios.post("http://micromesauthredirect.net:8090/login", {"action" : "dashboard"}, {
+            
+        })
+        .then(function (response){
+            console.log(response);
+        })
+        .catch(function (error){
+            console.log(error);
+        })
+    }
+
+  //#region google signin
+   signInSuccess(googleUser){
        this.loggedIn = true;
+       this.id_token = googleUser.getAuthResponse().id_token;
+       sessionStorage.setItem('id_token', this.id_token);
+       this.authorizationHeader(this.id_token);
        console.log(googleUser);
    }
 
    signIn(){
-       Vue.googleAuth().signIn(this.onSignIn, this.onSignInError);
+       Vue.googleAuth().signIn(this.signInSuccess, this.onSignInError);
     }
 
    signOut() {
        Vue.googleAuth().signOut(this.signOut);
     }
-
-  mounted(){
-    Vue.use(GoogleAuth, { client_id: '1025113353398-pb40di8kma99osibf68j8ov8fqvddr96.apps.googleusercontent.com' });
-    Vue.googleAuth().load();
-    Vue.googleAuth().directAccess();
-  }
-
-  onSignInError(error){
-      this.response = 'Failed to sign-in'
+    onSignInError(error){
       console.log('GOOGLE SERVER - SIGN-IN ERROR', error)
-  }
+    }
+//#endregion
 
 }
 </script>
