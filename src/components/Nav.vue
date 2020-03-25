@@ -5,27 +5,60 @@
             <ul>
                <router-link to="/" class="nav_element">Home</router-link>
                <router-link to="/graphql" class="nav_element">GraphQL</router-link>
-               <a href="/login">Login</a>
             </ul>
          </div>
       <div id="right" class="column">
          <ul>
-            <router-link to="/myaccount" class="nav_element account" v-if="loggedIn">Your Account</router-link>
-            <router-link to="/signin" class="nav_element account" v-else>Sign in</router-link>
+            <!-- login Button -->
+            <a id="signin-button" v-on:click="signIn">
+                <i class="fa fa-google-plus-official fa-3x"></i>
+                Sign in with Google
+            </a>
+
+            <!--<router-link to="/myaccount" class="nav_element account" v-if="loggedIn">Your Account</router-link>
+            <router-link to="/signin" class="nav_element account" v-else>Sign in</router-link>-->
             
          </ul>
       </div>
     </div>
+    <!-- Errors -->
+    <div v-if=response class="text-red"><p>{{response}}</p></div>
     </nav>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
+import GoogleAuth from 'vue-google-oauth';
 
 @Component
 export default class Nav extends Vue {
    loggedIn: boolean = false;
-   username: string = "";
+   response: String = '';
+
+   onSignIn(googleUser){
+       this.loggedIn = true;
+       console.log(googleUser);
+   }
+
+   signIn(){
+       Vue.googleAuth().signIn(this.onSignIn, this.onSignInError);
+    }
+
+   signOut() {
+       Vue.googleAuth().signOut(this.signOut);
+    }
+
+  mounted(){
+    Vue.use(GoogleAuth, { client_id: '1025113353398-pb40di8kma99osibf68j8ov8fqvddr96.apps.googleusercontent.com' });
+    Vue.googleAuth().load();
+    Vue.googleAuth().directAccess();
+  }
+
+  onSignInError(error){
+      this.response = 'Failed to sign-in'
+      console.log('GOOGLE SERVER - SIGN-IN ERROR', error)
+  }
+
 }
 </script>
 
@@ -81,6 +114,10 @@ nav{
     width: 100%;
     display: grid;
     grid-template-columns: 90% 10%;
+}
+
+.googleSignIn{
+    color: grey;
 }
 
 .account{
