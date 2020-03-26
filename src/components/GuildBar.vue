@@ -2,7 +2,7 @@
   <div class="guildbar panel verticalFullWindowSize scrollable noScrollbar">
     <ul>
       <li>
-        <router-link to="/" class="nav_element">Home</router-link>
+        <Guild/>
       </li>
       <li>
         <router-link to="/graphql" class="nav_element">GraphQL</router-link>
@@ -18,12 +18,13 @@
 </template>
 
 <script  lang="ts">
-import { Component, Vue } from "vue-property-decorator";
-import GoogleAuth from "vue-google-oauth";
-import VueSessionStorage from "vue-sessionstorage";
-import Authenticate from "@/scripts/sdk/authentication";
+import { Component, Vue } from "vue-property-decorator"
+import GoogleAuth from "vue-google-oauth"
+import VueSessionStorage from "vue-sessionstorage"
+import Authenticate from "@/scripts/sdk/authentication"
+import Guild from "./components/Guild.vue"
 
-const auth: Authenticate = new Authenticate();
+const auth: Authenticate = new Authenticate()
 //const axios = require('axios');
 
 @Component

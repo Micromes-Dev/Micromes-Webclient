@@ -4,7 +4,6 @@
       <GuildBar class="guildbar"/>
     </div>
     <div class="column">
-      <router-view class="right"/>
     </div>
   </div>
 </template>
@@ -24,6 +23,7 @@ export default class Messenger extends Vue {
   mounted() {
     Vue.use(VueCookies)
     
+    console.log(this.$route.params.id)
     console.log(this.$store.state.cache.test);
   }
 }
