@@ -1,5 +1,5 @@
-import User from '../Interfaces/User';
 import { JsonDecoder } from 'ts.data.json';
+import { User } from '../Interfaces';
 
 export default class UserFactory{
   jsonToUser(jsonString: string){
