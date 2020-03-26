@@ -1,33 +1,30 @@
 <template>
-  <div id="app" class="content">
-    <SidePanel class="column verticalFullWindowSize" />
-    <router-view class="column verticalFullWindowSize" />
+  <div id="app" class="content verticalFullWindowSize">
+    <div class="column left verticalFullWindowSize">
+      <GuildBar class="guildbar"/>
+    </div>
+    <div class="column">
+      <router-view class="right"/>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 //import { graphql, buildSchema } from 'graphql';
-import Nav from "./components/Nav.vue";
 import VueCookies from "vue-cookies-ts";
-import SidePanel from "./components/SidePanel.vue";
+import GuildBar from "./components/GuildBar.vue";
 
 @Component({
   components: {
-    Nav,
-    SidePanel
+    GuildBar
   }
 })
 export default class Messenger extends Vue {
-  name = [];
-
-  onLogin(): void {
-    this.name = this.$cookies.keys();
-  }
-
   mounted() {
-    Vue.use(VueCookies);
-    this.onLogin();
+    Vue.use(VueCookies)
+    
+    console.log(this.$store.state.cache.test);
   }
 }
 </script>
@@ -35,7 +32,6 @@ export default class Messenger extends Vue {
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
-  color: rgb(66, 219, 66);
 }
 
 * {
@@ -47,7 +43,7 @@ export default class Messenger extends Vue {
 }
 
 .container {
-  background-color: rgba(17, 17, 17, 0.5);
+  background-color: #36393f;
 }
 
 .column {
@@ -64,6 +60,19 @@ export default class Messenger extends Vue {
   color: white;
   width: 100%;
   display: grid;
-  grid-template-columns: 10% 90%;
+  grid-template-columns: 5% 95%;
+  background-color: #36393f;
+}
+
+.left {
+}
+
+.right {
+  margin: 1%;
+  background-color: #36393f;
+}
+
+.guildbar{
+
 }
 </style>

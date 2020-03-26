@@ -1,36 +1,42 @@
 import { User, Guild, Message, Channel } from './Interfaces';
 
 export default class Cache{
-  static curUser: User
-  static users: Map<string, User>
-  static guilds: Map<string, Guild>
+  loggedIn: Boolean = false
+  id_token: string = ""
+  curUser: User | undefined
+  users: Map<string, User> | undefined
+  guilds: Map<string, Guild> | undefined
 
-  static setCurUser(user: User){
+  setCurUser(user: User){
     this.curUser = user
   }
 
-  static addUser(user: User){
+  addUser(user: User){
+    if(this.users)
     this.users.set(user.uuid, user)
   }
 
-  static addGuild(guild: Guild){
+  addGuild(guild: Guild){
+    if(this.guilds)
     this.guilds.set(guild.uuid, guild)
   }
 
-  static getUser(uuid: string): User | undefined{
+  getUser(uuid: string): User | undefined{
+    if(this.users)
     return this.users.get(uuid)
   }
 
-  static getGuild(uuid: string): Guild | undefined{
+  getGuild(uuid: string): Guild | undefined{
+    if(this.guilds)
     return this.guilds.get(uuid)
   }
 
-  static getLastMessages(channel: Channel, number: Number) : Array<Message>{
+  getLastMessages(channel: Channel, number: Number) : Array<Message>{
     console.error('Function getLastMessages in Cache.ts not implemented yet');
     return []
   }
 
-  static getChannels(guild: Guild): Array<Channel>{
+  getChannels(guild: Guild): Array<Channel>{
     console.error('Function getChannels in Cache.ts not implemented yet');
     return []
   }

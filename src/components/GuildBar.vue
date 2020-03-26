@@ -1,6 +1,5 @@
 <template>
-  <div class="panel verticalFullWindowSize scrollable noScrollbar">
-    <h2>Our connections</h2>
+  <div class="guildbar panel verticalFullWindowSize scrollable noScrollbar">
     <ul>
       <li>
         <router-link to="/" class="nav_element">Home</router-link>
@@ -22,15 +21,13 @@
 import { Component, Vue } from "vue-property-decorator";
 import GoogleAuth from "vue-google-oauth";
 import VueSessionStorage from "vue-sessionstorage";
-import Authenticate from "@/scripts/sdk/authentication.ts";
+import Authenticate from "@/scripts/sdk/authentication";
 
 const auth: Authenticate = new Authenticate();
 //const axios = require('axios');
 
 @Component
-export default class SidePanel extends Vue {
-  loggedIn: boolean = false;
-  id_token: string = "";
+export default class GuildBar extends Vue {
 
   mounted() {
     //init important libs
@@ -42,16 +39,17 @@ export default class SidePanel extends Vue {
     //init google auth
     Vue.googleAuth().load();
     Vue.googleAuth().directAccess();
-    this.id_token = sessionStorage.getItem("id_token");
-    console.log(this.id_token);
-    if (this.id_token) {
-      this.loggedIn = true;
+    this.$store.state.cache.id_token = sessionStorage.getItem("id_token");
+    console.log(this.$store.state.cache.id_token);
+    if (this.$store.state.cache.id_token) {
+      this.$store.state.cache.loggedIn = true;
     }
-    auth.authorizationHeader(this.id_token);
+    auth.authorizationHeader(this.$store.state.cache.id_token);
+    this.$store.state.cache.test = "hallo1"
   }
 
   signIn() {
-    auth.id_token = this.id_token;
+    auth.id_token = this.$store.state.cache.id_token;
     Vue.googleAuth().signIn(auth.signInSuccess, auth.onSignInError);
   }
 
@@ -62,10 +60,11 @@ export default class SidePanel extends Vue {
 </script>
 
 <style scoped>
-.panel {
+
+.guildbar.panel {
   width: 100%;
   height: 100vh;
-  background-color: rgb(42, 42, 42);
+  background-color: #202225;
   display: inline-block;
   text-decoration: none;
 }
