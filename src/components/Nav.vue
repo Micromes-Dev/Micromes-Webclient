@@ -3,8 +3,8 @@
       <div name="table" class="content">
          <div id="left" class="column">
             <ul>
-               <a href="/" class="nav_element">Home</a>
-               <a href="/graphql" class="nav_element">GraphQL</a>
+               <router-link to="/" class="nav_element">Home</router-link>
+               <router-link to="/graphql" class="nav_element">GraphQL</router-link>
             </ul>
          </div>
       <div id="right" class="column">

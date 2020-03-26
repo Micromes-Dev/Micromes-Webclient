@@ -17,6 +17,7 @@
     "vue-cookies-ts": "^1.5.19",
     "vue-google-oauth": "^1.0.5",
     "vue-property-decorator": "^8.3.0",
+    "vue-router": "^3.1.5",
     "vue-sessionstorage": "^1.0.0",
     "vuex": "^3.1.2"
   },

@@ -2,6 +2,7 @@
    <div id="app">
       <Nav/>
       <div>{{name}}</div>
+      <router-view/>
       <h1>hi</h1>
    </div>
 </template>
