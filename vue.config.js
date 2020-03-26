@@ -3,7 +3,7 @@ module.exports = {
     disableHostCheck: true,
     proxy: {
       '^/': {
-        target: 'http://micromesauthredirect.net:8090',
+        target: 'http://micromes.net:8090',
         changeOrigin: true, // so CORS doesn't bite us. 
         
       },

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container verticalFullWindowSize">
      <br>
      <br>
      <div>hia</div>
@@ -22,3 +22,10 @@ export default {
 
 
 </script>
+
+<style scoped>
+.container{
+  height: 100%;
+  display: inline-block;
+}
+</style>
