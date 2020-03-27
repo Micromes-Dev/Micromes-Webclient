@@ -1,6 +1,7 @@
 import { User, Guild, Message, Channel } from './Interfaces';
 
 export default class Cache{
+  clientID: string = "1025113353398-pb40di8kma99osibf68j8ov8fqvddr96.apps.googleusercontent.com"
   loggedIn: Boolean = false
   id_token: string = ""
   curUser: User | undefined

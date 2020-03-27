@@ -19,10 +19,10 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator"
-import Authenticate from "@/scripts/sdk/authentication"
+//import Authenticate from "@/scripts/sdk/authentication"
 import Guild from "@/components/Guild.vue"
 
-const auth: Authenticate = new Authenticate()
+//const auth: Authenticate = new Authenticate()
 //const axios = require('axios');
 
 @Component({
@@ -33,11 +33,11 @@ const auth: Authenticate = new Authenticate()
 export default class GuildBar extends Vue {
   private vue: any = Vue;
 
-  mounted() {
+  /*mounted() {
     //init important libs
     //init google auth
-    this.vue.googleAuth().load();
-    this.vue.googleAuth().directAccess();
+    Vue.googleAuth().load();
+    Vue.googleAuth().directAccess();
     this.$store.state.cache.id_token = sessionStorage.getItem("id_token");
     console.log(this.$store.state.cache.id_token);
     if (this.$store.state.cache.id_token) {
@@ -49,12 +49,12 @@ export default class GuildBar extends Vue {
 
   signIn() {
     auth.id_token = this.$store.state.cache.id_token;
-    this.vue.googleAuth().signIn(auth.signInSuccess, auth.onSignInError);
+    Vue.googleAuth().signIn(auth.signInSuccess, auth.onSignInError);
   }
 
   signOut() {
-    this.vue.googleAuth().signOut(auth.serverSignout);
-  }
+    Vue.googleAuth().signOut(auth.serverSignout);
+  }*/
 }
 </script>
 

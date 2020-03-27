@@ -55,7 +55,7 @@ export interface User extends Entity{
 
 export interface Guild extends Entity{
   name: string
-  channels: Array<Channel>
+  channels: Array<GuildChannel>
 }
 
 export enum Status{
