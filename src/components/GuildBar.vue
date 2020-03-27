@@ -17,10 +17,8 @@
   </div>
 </template>
 
-<script  lang="ts">
+<script lang="ts">
 import { Component, Vue } from "vue-property-decorator"
-import GoogleAuth from "vue-google-oauth"
-import VueSessionStorage from "vue-sessionstorage"
 import Authenticate from "@/scripts/sdk/authentication"
 import Guild from "./components/Guild.vue"
 
@@ -32,11 +30,6 @@ export default class GuildBar extends Vue {
 
   mounted() {
     //init important libs
-    Vue.use(VueSessionStorage);
-    Vue.use(GoogleAuth, {
-      client_id:
-        "1025113353398-pb40di8kma99osibf68j8ov8fqvddr96.apps.googleusercontent.com"
-    });
     //init google auth
     Vue.googleAuth().load();
     Vue.googleAuth().directAccess();

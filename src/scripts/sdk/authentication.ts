@@ -3,8 +3,8 @@ const axios = require('axios');
 
 export default class Authenticator extends Vue {
 
-  id_token: String = "";
-
+  id_token: string = "";
+  loggedIn: boolean = false
 
   authorizationHeader(id_token: String) {
     axios.defaults.headers.common['Authorization'] = `Bearer ${id_token}`;
@@ -13,16 +13,16 @@ export default class Authenticator extends Vue {
     axios.defaults.headers.common['Access-Control-Allow-Headers'] = 'Origin, Content-Type, X-Auth-Token';
     axios.post("http://micromes.net:8080/api", { "action": "dashboard" }, {
     })
-      .then(function (response) {
+      .then(function (response : Response) {
         console.log(response);
       })
-      .catch(function (error) {
+      .catch(function (error : Error) {
         console.log(error);
       })
   }
 
   //#region google signin
-  signInSuccess(googleUser) {
+  signInSuccess(googleUser : any) {
     this.loggedIn = true;
     this.id_token = googleUser.getAuthResponse().id_token;
     sessionStorage.setItem('id_token', this.id_token);
@@ -30,7 +30,7 @@ export default class Authenticator extends Vue {
     console.log(googleUser);
   }
 
-  onSignInError(error) {
+  onSignInError(error : Error) {
     console.log('GOOGLE SERVER - SIGN-IN ERROR', error)
   }
 
