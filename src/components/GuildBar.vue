@@ -2,7 +2,7 @@
   <div class="guildbar panel verticalFullWindowSize scrollable noScrollbar">
     <ul>
       <li>
-        <Guild/>
+        <Guild> </Guild>
       </li>
       <li>
         <router-link to="/graphql" class="nav_element">GraphQL</router-link>
@@ -20,19 +20,24 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator"
 import Authenticate from "@/scripts/sdk/authentication"
-import Guild from "./components/Guild.vue"
+import Guild from "@/components/Guild.vue"
 
 const auth: Authenticate = new Authenticate()
 //const axios = require('axios');
 
-@Component
+@Component({
+  components: {
+    Guild
+  }
+})
 export default class GuildBar extends Vue {
+  private vue: any = Vue;
 
   mounted() {
     //init important libs
     //init google auth
-    Vue.googleAuth().load();
-    Vue.googleAuth().directAccess();
+    this.vue.googleAuth().load();
+    this.vue.googleAuth().directAccess();
     this.$store.state.cache.id_token = sessionStorage.getItem("id_token");
     console.log(this.$store.state.cache.id_token);
     if (this.$store.state.cache.id_token) {
@@ -44,11 +49,11 @@ export default class GuildBar extends Vue {
 
   signIn() {
     auth.id_token = this.$store.state.cache.id_token;
-    Vue.googleAuth().signIn(auth.signInSuccess, auth.onSignInError);
+    this.vue.googleAuth().signIn(auth.signInSuccess, auth.onSignInError);
   }
 
   signOut() {
-    Vue.googleAuth().signOut(auth.serverSignout);
+    this.vue.googleAuth().signOut(auth.serverSignout);
   }
 }
 </script>
