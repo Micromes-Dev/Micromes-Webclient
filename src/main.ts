@@ -3,7 +3,7 @@ import Messenger from './Messenger.vue'
 import './registerServiceWorker'
 import router from './router'
 import store from './store'
-import GAuth from 'vue-google-oauth2-gapi'
+const GAuth = require('vue-google-oauth2-gapi')
 
 //const GoogleAuth = require("vue-google-oauth")
 const VueSessionStorage = require("vue-sessionstorage")

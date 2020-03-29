@@ -1,6 +1,5 @@
 import { Component, Vue } from 'vue-property-decorator';
 //import { OAuth2Client }  from 'google-auth-library';
-import GAuth from 'vue-google-oauth2-gapi'
 const axios = require('axios')
 const VueSessionStorage = require("vue-sessionstorage")
 //const http = require('http');
@@ -14,6 +13,7 @@ export default class Authenticator extends Vue {
   id_token: string = "";
   loggedIn: boolean = false
   oAuth2Client: any
+  vue: any = Vue
 
   authorizationHeader(id_token: String) {
     axios.defaults.headers.common['Authorization'] = `Bearer ${id_token}`;
@@ -31,7 +31,7 @@ export default class Authenticator extends Vue {
   }
 
   test() {
-    this.$gAuth.signIn(function (user: any) {
+    this.vue.$gAuth.signIn(function (user: any) {
       //on success do something
       console.log('user', user)
     }, function (error: any) {
