@@ -19,10 +19,10 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator"
-//import Authenticate from "@/scripts/sdk/authentication"
+import Authenticate from "@/scripts/sdk/authentication.ts"
 import Guild from "@/components/Guild.vue"
 
-//const auth: Authenticate = new Authenticate()
+const auth: Authenticate = new Authenticate()
 //const axios = require('axios');
 
 @Component({
@@ -55,6 +55,12 @@ export default class GuildBar extends Vue {
   signOut() {
     Vue.googleAuth().signOut(auth.serverSignout);
   }*/
+
+  signIn(){
+    auth.clientID = this.$store.state.cache.clientID
+    auth.test();
+    //await auth.authenticate();
+  }
 }
 </script>
 

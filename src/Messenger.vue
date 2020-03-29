@@ -11,7 +11,6 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 //import { graphql, buildSchema } from 'graphql';
-import VueCookies from "vue-cookies-ts";
 import GuildBar from "./components/GuildBar.vue";
 
 @Component({
@@ -21,7 +20,7 @@ import GuildBar from "./components/GuildBar.vue";
 })
 export default class Messenger extends Vue {
   mounted() {
-    Vue.use(VueCookies)
+    
     
     console.log(this.$route.params.id)
     console.log(this.$store.state.cache.test);
