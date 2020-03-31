@@ -2,16 +2,18 @@
   <div class="guildbar panel verticalFullWindowSize scrollable noScrollbar">
     <ul>
       <li>
-        <Guild> </Guild>
+        <Guild></Guild>
       </li>
       <li>
         <router-link to="/graphql" class="nav_element">GraphQL</router-link>
       </li>
       <li>
-        <a id="signin-button" v-on:click="signIn">
+        
+        <!--<a id="signin-button" v-on:click="signIn">
           <i class="fab fa-google"></i>
           Sign in
-        </a>
+        </a>-->
+        <!--<iframe src="http://micromes.net:8080/googleLogIn.html" frameborder="0" />-->
       </li>
     </ul>
   </div>
@@ -19,10 +21,11 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator"
-import Authenticate from "@/scripts/sdk/authentication.ts"
+//import Authenticate from "@/scripts/sdk/authentication.ts"
 import Guild from "@/components/Guild.vue"
 
-const auth: Authenticate = new Authenticate()
+//const auth: Authenticate = new Authenticate()
+
 //const axios = require('axios');
 
 @Component({
@@ -32,6 +35,31 @@ const auth: Authenticate = new Authenticate()
 })
 export default class GuildBar extends Vue {
   private vue: any = Vue;
+  
+  signIn(){
+    /*console.log("open window");
+    var popup:Window  = window.open("http://micromes.net:8080/googleLogIn.html",'Authenticate','scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,width=0,height=0');
+    console.log("blur window");
+    popup.blur();
+    popup.resizeTo(0,0)
+    console.log("focus correct window");
+    window.focus();
+    console.log("get element from new window");
+    var element:HTMLElement = popup.document.getElementById("returnValue");
+    console.log(document)
+    console.log(element)
+    console.log("wait for window");
+    while(element.innerHTML == ""){
+      console.log(".")
+    }
+    console.log("print element html");
+    console.log(element.innerHTML);
+    popup.close();
+    //await auth.authenticate();*/
+  }
+
+  mounted(){
+  }
 
   /*mounted() {
     //init important libs
@@ -56,16 +84,11 @@ export default class GuildBar extends Vue {
     Vue.googleAuth().signOut(auth.serverSignout);
   }*/
 
-  signIn(){
-    auth.clientID = this.$store.state.cache.clientID
-    auth.test();
-    //await auth.authenticate();
-  }
+  
 }
 </script>
 
 <style scoped>
-
 .guildbar.panel {
   width: 100%;
   height: 100vh;

@@ -1,7 +1,7 @@
 <template>
   <div id="app" class="content verticalFullWindowSize">
     <div class="column left verticalFullWindowSize">
-      <GuildBar class="guildbar"/>
+      <GuildBar class="guildbar" />
     </div>
     <div class="column">
     </div>
@@ -9,6 +9,7 @@
 </template>
 
 <script lang="ts">
+
 import { Component, Vue } from "vue-property-decorator";
 //import { graphql, buildSchema } from 'graphql';
 import GuildBar from "./components/GuildBar.vue";
@@ -20,9 +21,7 @@ import GuildBar from "./components/GuildBar.vue";
 })
 export default class Messenger extends Vue {
   mounted() {
-    
-    
-    console.log(this.$route.params.id)
+    console.log(this.$route.params.id);
     console.log(this.$store.state.cache.test);
   }
 }
@@ -71,7 +70,10 @@ export default class Messenger extends Vue {
   background-color: #36393f;
 }
 
-.guildbar{
+.guildbar {
+}
 
+.googleSignIn {
+  color: black;
 }
 </style>

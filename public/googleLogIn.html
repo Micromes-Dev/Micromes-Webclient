@@ -1,0 +1,63 @@
+<html>
+<meta name="google-signin-client_id"
+  content="1025113353398-pb40di8kma99osibf68j8ov8fqvddr96.apps.googleusercontent.com">
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<div id="signInButton" class="g-signin2" data-onsuccess="onSignIn"></div>
+<div id="returnValue"></div>
+<script>
+  function onSignIn(googleUser) {
+    console.log(googleUser)
+    document.getElementById("returnValue").innerHTML = "Signed in as " + googleUser.getBasicProfile().getName();
+    var jwt = getJWTFromAuthServer(googleUser.getAuthResponse().id_token);
+    if(jwt.status == 200){
+      setCookie("micromesJWt", jwt.responseText, 7);
+      console.log(getCookie("micromesJWT"));
+    }else{
+      console.log(jwt);
+    }
+    
+  }
+
+  function getJWTFromAuthServer(id_token) {
+    //get micromes.net:8091/google
+    //authorization header: Bearer + id_token
+    axios.defaults.headers.common['Authorization'] = `Bearer ${id_token}`;
+    axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
+    axios.defaults.headers.common['Access-Control-Allow-Methods'] = 'POST, GET, PUT, OPTIONS, DELETE';
+    axios.defaults.headers.common['Access-Control-Allow-Headers'] = 'Access-Control-Allow-Methods, Access-Control-Allow-Origin, Origin, Accept, Content-Type';
+    axios.post("http://micromes.net:8080/google", { "action": "dashboard" }, {
+    })
+      .then(function (response) {
+        console.log(response);
+        return response;
+      })
+      .catch(function (error) {
+        console.log(error);
+      })
+    return "";
+  }
+
+  function setCookie(name, value, days) {
+    var expires = "";
+    if (days) {
+      var date = new Date();
+      date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+      expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + (value || "") + expires + "; path=/";
+  }
+
+  function getCookie(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    for (var i = 0; i < ca.length; i++) {
+      var c = ca[i];
+      while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+      if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+    }
+    return null;
+  }
+</script>
+
+</html>
