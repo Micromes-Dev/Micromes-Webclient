@@ -2,6 +2,7 @@ import { Component, Vue } from 'vue-property-decorator';
 //import { OAuth2Client }  from 'google-auth-library';
 const axios = require('axios')
 const VueSessionStorage = require("vue-sessionstorage")
+const GAuth = require('vue-google-oauth2-gapi')
 //const http = require('http');
 //const url = require('url');
 //const open = require('open');
