@@ -7,7 +7,11 @@
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
 
-@Component
+@Component({
+  components:{
+    
+  }
+})
 export default class GuildBarGuild extends Vue {
   @Prop({ required: true }) name: string;
   @Prop({ required: true }) pictureURL: string;

@@ -1,16 +1,22 @@
 <template>
+<<<<<<< HEAD
   <div id="app" class="content verticalFullWindowSize">
     <GuildBar class="column left verticalFullWindowSize guildbar" />
     <GuildComp class="column verticalFullWindowSize"/>
+=======
+  <div id="app" class="content verticalFullWindowSize tableContainer">
+    <GuildBar class="column left verticalFullWindowSize guildbar"/>
+    <GuildComp class="column right"/>
+>>>>>>> f9c6296cbf4bf6a16ba503b7d1259c8912eb4f2f
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Vue, Watch } from "vue-property-decorator";
-import { Route } from "vue-router";
-import GuildBar from "./components/GuildBar.vue";
-import GuildComp from "./components/GuildComp.vue";
-import { User } from "./scripts/sdk/Interfaces";
+import { Component, Vue, Watch } from "vue-property-decorator"
+import { Route } from "vue-router"
+import GuildBar from "./components/GuildBar.vue"
+import GuildComp from "@/components/GuildComp.vue"
+import { User } from "./scripts/sdk/Interfaces"
 
 @Component({
   components: {
@@ -65,8 +71,6 @@ export default class Messenger extends Vue {
 .container {
   background-color: #36393f;
 }
-
-
 
 .verticalFullWindowSize {
   height: 100vh;
