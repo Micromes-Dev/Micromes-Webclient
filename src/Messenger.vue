@@ -9,7 +9,7 @@
 import { Component, Vue, Watch } from "vue-property-decorator";
 import { Route } from "vue-router";
 import GuildBar from "./components/GuildBar.vue";
-import GuildComp from "./components/GuildComp.vue";
+import GuildComp from "@/components/GuildComp.vue";
 import { User } from "./scripts/sdk/Interfaces";
 
 @Component({

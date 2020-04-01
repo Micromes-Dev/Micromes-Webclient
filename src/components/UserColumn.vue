@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    bonjur
   </div>
 </template>
 
@@ -12,5 +13,8 @@ export default class UserColumn extends Vue {
 </script>
 
 <style scoped>
-
+.container{
+  width: 100%;
+  background-color: darkkhaki;
+}
 </style>

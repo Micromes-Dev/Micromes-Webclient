@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    hi
   </div>
 </template>
 
@@ -12,5 +13,8 @@ export default class ChannelColumn extends Vue {
 </script>
 
 <style scoped>
-
+.container{
+  width: 100%;
+  background-color: darkkhaki;
+}
 </style>

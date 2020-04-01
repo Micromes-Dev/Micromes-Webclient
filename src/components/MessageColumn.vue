@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    hallo
   </div>
 </template>
 
@@ -13,4 +14,8 @@ export default class MessageColumn extends Vue {
 
 <style scoped>
 
+.container{
+  width: 100%;
+  background-color: darkkhaki;
+}
 </style>
