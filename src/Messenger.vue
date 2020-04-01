@@ -3,25 +3,52 @@
     <div class="column left verticalFullWindowSize">
       <GuildBar class="guildbar" />
     </div>
-    <div class="column">
+    <div class="column right">
+      <GuildComp />
     </div>
   </div>
 </template>
 
 <script lang="ts">
-
-import { Component, Vue } from "vue-property-decorator";
+import { Component, Vue, Watch } from "vue-property-decorator";
+import { Route } from "vue-router";
 import GuildBar from "./components/GuildBar.vue";
+import GuildComp from "./components/GuildComp.vue";
+import { User } from "./scripts/sdk/Interfaces";
 
 @Component({
   components: {
-    GuildBar
+    Route,
+    GuildBar,
+    User,
+    GuildComp
   }
 })
 export default class Messenger extends Vue {
+  getCookie(name: string): string | undefined {
+    var nameEQ = name + "="
+    var ca = document.cookie.split(";")
+    for (var i = 0; i < ca.length; i++) {
+      var c = ca[i]
+      while (c.charAt(0) == " ") c = c.substring(1, c.length)
+      if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length)
+    }
+    return null;
+  }
+
   mounted() {
-    console.log(this.$route.params.id);
-    console.log(this.$store.state.cache.test);
+    var cookie = this.getCookie("micromesJWt")
+    var encodedJWTData = cookie.substring(
+      cookie.indexOf(".") + 1,
+      cookie.lastIndexOf(".")
+    )
+    var decodedJWTData = atob(encodedJWTData)
+    this.$store.state.cache.jwtData = decodedJWTData
+  }
+
+  @Watch("$route", { immediate: true, deep: true })
+  onURLChange(route: Route) {
+    this.$store.state.cache.curGuild = route.params.guildId
   }
 }
 </script>
@@ -56,23 +83,15 @@ export default class Messenger extends Vue {
 .content {
   color: white;
   width: 100%;
-  display: grid;
-  grid-template-columns: 5% 95%;
+  grid-template-columns: auto auto;
   background-color: #36393f;
 }
 
-.left {
+.left.guildbar {
+  background-color: #202225;
 }
 
 .right {
-  margin: 1%;
   background-color: #36393f;
-}
-
-.guildbar {
-}
-
-.googleSignIn {
-  color: black;
 }
 </style>
