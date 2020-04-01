@@ -1,8 +1,8 @@
 <template>
   <div class="container tableContainer">
-    <ChannelColumn class="column" />
-    <MessageColumn class="column" />
-    <UserColumn class="column" />
+    <ChannelColumn class="column channels"/>
+    <MessageColumn class="column messages"/>
+    <UserColumn class="column users" />
   </div>
 </template>
 
@@ -29,11 +29,23 @@ export default class GuildComp extends Vue {
 .tableContainer {
   display: flex;
   width: 100%;
-  grid-template-columns: 20% auto 10%;
-  grid-template-rows: auto;
 }
 
 .column {
   display: flexbox;
+}
+
+.column.channels{
+  padding-inline: 5%;
+  width: auto;
+}
+
+.column.messages{
+  width: 100%;
+}
+
+.column.users{
+  padding-inline: 5%;
+  width: auto;
 }
 </style>

@@ -26,6 +26,7 @@ export default class ChannelColumn extends Vue {
 <style scoped>
 .container{
   width: 100%;
+  padding-inline: 40%;
   background-color: darkkhaki;
 }
 </style>
