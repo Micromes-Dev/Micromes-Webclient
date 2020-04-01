@@ -15,6 +15,7 @@ import { Guild } from '@/scripts/sdk/Interfaces';
 
 @Component({
   components: {
+    Guild,
     ChannelColumn,
     MessageColumn,
     UserColumn
@@ -26,6 +27,7 @@ export default class GuildComp extends Vue {
 </script>
 
 <style scoped>
+
 .tableContainer {
   display: flex;
   width: 100%;
@@ -36,7 +38,6 @@ export default class GuildComp extends Vue {
 }
 
 .column.channels{
-  padding-inline: 5%;
   width: auto;
 }
 
@@ -45,7 +46,6 @@ export default class GuildComp extends Vue {
 }
 
 .column.users{
-  padding-inline: 5%;
   width: auto;
 }
 </style>

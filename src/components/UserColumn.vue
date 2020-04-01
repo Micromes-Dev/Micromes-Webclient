@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    bonjur
+    Users
   </div>
 </template>
 
