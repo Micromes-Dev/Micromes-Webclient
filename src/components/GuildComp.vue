@@ -1,8 +1,8 @@
 <template>
   <div class="container tableContainer">
-    <ChannelColumn class="column" />
-    <MessageColumn class="column" />
-    <UserColumn class="column" />
+    <ChannelColumn class="column channels"/>
+    <MessageColumn class="column messages"/>
+    <UserColumn class="column users" />
   </div>
 </template>
 
@@ -15,6 +15,7 @@ import { Guild } from '@/scripts/sdk/Interfaces';
 
 @Component({
   components: {
+    Guild,
     ChannelColumn,
     MessageColumn,
     UserColumn
@@ -26,14 +27,25 @@ export default class GuildComp extends Vue {
 </script>
 
 <style scoped>
+
 .tableContainer {
   display: flex;
   width: 100%;
-  grid-template-columns: 20% auto 10%;
-  grid-template-rows: auto;
 }
 
 .column {
   display: flexbox;
+}
+
+.column.channels{
+  width: auto;
+}
+
+.column.messages{
+  width: 100%;
+}
+
+.column.users{
+  width: auto;
 }
 </style>

@@ -35,8 +35,6 @@ export default class ChannelColumn extends Vue {
 
 <style scoped>
 .container{
-  padding-left: 5px;
   padding-right: 5px;
   padding-top: 15px;
 }
-</style>
