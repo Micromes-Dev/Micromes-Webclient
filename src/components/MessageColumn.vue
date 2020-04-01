@@ -1,18 +1,14 @@
 <template>
-  <div class="container">
+  <div class="container dark">
     Messages
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator"
-import {Message } from "../scripts/sdk/Interfaces"
+import { Message } from "../scripts/sdk/Interfaces"
 
-@Component({
-  components:{
-    Message
-  }
-})
+@Component
 export default class MessageColumn extends Vue {
 }
 </script>
@@ -21,6 +17,5 @@ export default class MessageColumn extends Vue {
 
 .container{
   width: 100%;
-  background-color: darkseagreen;
 }
 </style>

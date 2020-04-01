@@ -1,5 +1,5 @@
 <template>
-  <div class="guildbar panel verticalFullWindowSize scrollable noScrollbar">
+  <div class="guildbar panel verticalFullWindowSize scrollable noScrollbar dark">
     <ul>
       <li>
         <GuildBarGuild
@@ -36,7 +36,6 @@ export default class GuildBar extends Vue {
 <style scoped>
 .guildbar.panel {
   height: 100vh;
-  background-color: #202225;
   display: inline-block;
   text-decoration: none;
 }

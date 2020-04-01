@@ -1,6 +1,6 @@
 <template>
   <div id="app" class="content verticalFullWindowSize">
-    <GuildBar class="column left verticalFullWindowSize guildbar" />
+    <GuildBar class="column verticalFullWindowSize guildbar" />
     <GuildComp class="column verticalFullWindowSize"/>
   </div>
 </template>
@@ -33,7 +33,7 @@ export default class Messenger extends Vue {
   }
 
   mounted() {
-    var cookie = this.getCookie("micromesJWt")
+    var cookie: string = this.getCookie("micromesJWt")
     var encodedJWTData = cookie.substring(
       cookie.indexOf(".") + 1,
       cookie.lastIndexOf(".")
@@ -50,14 +50,11 @@ export default class Messenger extends Vue {
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-}
 
 * {
   padding: 0;
   margin: 0;
-  font-family: "Ubuntu", sans-serif;
+  font-family: 'Comfortaa', cursive;
   color: white;
   text-decoration: none;
 }
@@ -69,6 +66,17 @@ export default class Messenger extends Vue {
 .verticalFullWindowSize {
   height: 100vh;
 }
+
+.padded {
+  padding-top: 15px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.light { background-color: #00A7E1;}
+.dark { background-color: #00171F;}
+.middledark { background-color: #003459;}
+.cyan { background-color: #007EA7;}
 </style>
 
 <style scoped>
@@ -82,13 +90,5 @@ export default class Messenger extends Vue {
 
 .column {
   display: flexbox;
-}
-
-.left.guildbar {
-  background-color: #202225;
-}
-
-.right {
-  background-color: #36393f;
 }
 </style>
