@@ -1,15 +1,25 @@
 <html>
-<meta name="google-signin-client_id"
-  content="1025113353398-pb40di8kma99osibf68j8ov8fqvddr96.apps.googleusercontent.com">
-<script src="https://apis.google.com/js/platform.js" async defer></script>
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<div id="signInButton" class="g-signin2" data-onsuccess="googleSignIn"></div>
-<diV id="Signup" style="display:none;">
-  <label>Username:</label>
-  <input type="text" id="usernameInput">
-  <button type="button" onclick="signUp()">Create User</button>
-</diV>
-<div id="returnValue"></div>
+<!--script import and meta-->
+
+<head>
+  <meta name="google-signin-client_id" content="1025113353398-pb40di8kma99osibf68j8ov8fqvddr96.apps.googleusercontent.com">
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+
+<!--body-->
+
+<body>
+  <div id="signInButton" class="g-signin2" data-onsuccess="googleSignIn"></div>
+  <diV id="Signup" style="display:none;">
+    <label>Username:</label>
+    <input type="text" id="usernameInput">
+    <button type="button" onclick="signUp()">Create User</button>
+  </diV>
+  <div id="returnValue"></div>
+</body>
+
+<!--scripts-->
 <script>
   var id_token = "";
 
@@ -23,7 +33,7 @@
 
   function logIn() {
     axios.defaults.headers.common['Authorization'] = `Bearer ${id_token}`;
-    axios.get("http://micromes.net:8080/auth/google", { "action": "dashboard" }, {
+    axios.get("/auth/google", { "action": "dashboard" }, {
     })
       .then(function (response) {
         setCookie("micromesJWt", response.data, 7)
@@ -40,7 +50,7 @@
   function signUp() {
     axios.defaults.headers.common['Authorization'] = `Bearer ${id_token}`
     var username = document.getElementById("usernameInput").value
-    axios.post(`http://micromes.net:8080/auth/createUser?name=${username}`, { "action": "dashboard" }, {
+    axios.post(`/auth/createUser?name=${username}`, { "action": "dashboard" }, {
     })
       .then(function (response) {
         setCookie("micromesJWt", response.data, 7)
@@ -51,24 +61,6 @@
         console.error("Couldn´t connect to backend server");
       })
   }
-
-  /*function getJWTFromAuthServer(id_token) {
-    //get micromes.net:8091/google
-    //authorization header: Bearer + id_token
-    axios.defaults.headers.common['Authorization'] = `Bearer ${id_token}`;
-    axios.get("http://micromes.net:8080/auth/google", { "action": "dashboard" }, {
-    })
-      .then(function (response) {
-        console.log(response);
-        return response;
-      })
-      .catch(function (error) {
-        if(error.response.status == 404){
-          document.getElementById("Signup").removeAttribute("hidden");
-        }
-      })
-    return "";
-  }*/
 
   function setCookie(name, value, days) {
     var expires = "";
