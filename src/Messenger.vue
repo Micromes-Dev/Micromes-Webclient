@@ -1,13 +1,7 @@
 <template>
-<<<<<<< HEAD
   <div id="app" class="content verticalFullWindowSize">
     <GuildBar class="column left verticalFullWindowSize guildbar" />
     <GuildComp class="column verticalFullWindowSize"/>
-=======
-  <div id="app" class="content verticalFullWindowSize tableContainer">
-    <GuildBar class="column left verticalFullWindowSize guildbar"/>
-    <GuildComp class="column right"/>
->>>>>>> f9c6296cbf4bf6a16ba503b7d1259c8912eb4f2f
   </div>
 </template>
 

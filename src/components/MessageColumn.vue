@@ -21,6 +21,6 @@ export default class MessageColumn extends Vue {
 
 .container{
   width: 100%;
-  background-color: darkkhaki;
+  background-color: darkseagreen;
 }
 </style>
