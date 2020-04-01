@@ -1,6 +1,6 @@
 <template>
   <div id="app" class="content verticalFullWindowSize">
-    <GuildBar class="column left verticalFullWindowSize guildbar" />
+    <GuildBar class="column left verticalFullWindowSize guildbar"/>
     <GuildComp class="column"/>
   </div>
 </template>
@@ -65,8 +65,6 @@ export default class Messenger extends Vue {
 .container {
   background-color: #36393f;
 }
-
-
 
 .verticalFullWindowSize {
   height: 100vh;
