@@ -2,12 +2,11 @@
   <div class="guildbar panel verticalFullWindowSize scrollable noScrollbar">
     <ul>
       <li>
-        <Guild></Guild>
-      </li>
-      <li>
-        <router-link to="/graphql" class="nav_element">GraphQL</router-link>
-      </li>
-      <li>
+        <GuildBarGuild
+          name="test"
+          pictureURL="https://yt3.ggpht.com/a-/AOh14GgRrZ6dNfb8p4jwooTDk5sQz55Rn6HwHI3RkhcLmBs=s88-c-k-c0xffffffff-no-rj-mo"
+          uuid="kjköljhgL"
+        />
       </li>
     </ul>
   </div>
@@ -15,23 +14,27 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import Guild from "@/components/Guild.vue";
+import GuildBarGuild from "@/components/GuildBarGuild.vue";
 
 @Component({
   components: {
-    Guild
+    GuildBarGuild
   }
 })
 export default class GuildBar extends Vue {
   private vue: any = Vue;
 
-  mounted() {}
+  mounted() {
+    console.log("Guild id");
+    console.log(this.$route.params);
+    if (this.$route.params.guildId != null)
+      console.log(this.$route.params.guildId);
+  }
 }
 </script>
 
 <style scoped>
 .guildbar.panel {
-  width: 100%;
   height: 100vh;
   background-color: #202225;
   display: inline-block;

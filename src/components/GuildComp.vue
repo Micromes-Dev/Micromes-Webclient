@@ -1,5 +1,6 @@
 <template>
-  <div class="guildContainer">
+  <div class="container">
+    hi
   </div>
 </template>
 
@@ -7,12 +8,12 @@
 import { Component, Vue } from "vue-property-decorator"
 
 @Component
-export default class Guild extends Vue {
-  text: string = ""
-  pictureURL: string = ""
+export default class GuildComp extends Vue {
 }
 </script>
 
 <style scoped>
-
+.container{
+  display: inline-block;
+}
 </style>
