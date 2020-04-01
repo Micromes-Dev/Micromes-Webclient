@@ -1,11 +1,7 @@
 <template>
   <div id="app" class="content verticalFullWindowSize">
-    <div class="column left verticalFullWindowSize">
-      <GuildBar class="guildbar" />
-    </div>
-    <div class="column right">
-      <GuildComp />
-    </div>
+    <GuildBar class="column left verticalFullWindowSize guildbar" />
+    <GuildComp class="column"/>
   </div>
 </template>
 
@@ -70,9 +66,7 @@ export default class Messenger extends Vue {
   background-color: #36393f;
 }
 
-.column {
-  display: inline-grid;
-}
+
 
 .verticalFullWindowSize {
   height: 100vh;
@@ -85,6 +79,10 @@ export default class Messenger extends Vue {
   width: 100%;
   grid-template-columns: auto auto;
   background-color: #36393f;
+}
+
+.column {
+  display: inline-grid;
 }
 
 .left.guildbar {
