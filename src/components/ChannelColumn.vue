@@ -16,7 +16,7 @@ import ChannelComp from './ChannelComp.vue'
 })
 export default class ChannelColumn extends Vue {
   private channel : Channel = {
-    name: "Welcome",
+    name: "welcome",
     checksum: 1,
     uuid: "1"
   }
@@ -25,7 +25,6 @@ export default class ChannelColumn extends Vue {
 
 <style scoped>
 .container{
-  width: 100%;
-  background-color: darkkhaki;
+  padding: 5px;
 }
 </style>
