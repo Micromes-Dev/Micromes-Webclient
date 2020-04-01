@@ -1,7 +1,7 @@
 <template>
   <div id="app" class="content verticalFullWindowSize">
     <GuildBar class="column left verticalFullWindowSize guildbar" />
-    <GuildComp class="column"/>
+    <GuildComp class="column verticalFullWindowSize"/>
   </div>
 </template>
 
@@ -75,14 +75,15 @@ export default class Messenger extends Vue {
 
 <style scoped>
 .content {
+  display: flex;
   color: white;
   width: 100%;
   grid-template-columns: auto auto;
-  background-color: #36393f;
+  background-color: #00171F;
 }
 
 .column {
-  display: inline-grid;
+  display: flexbox;
 }
 
 .left.guildbar {
