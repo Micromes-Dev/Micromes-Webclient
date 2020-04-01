@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="comp lightblue">
     #{{ channel.name }}
   </div>
 </template>
@@ -15,10 +15,13 @@ export default class ChannelComp extends Vue {
 </script>
 
 <style scoped>
-.container {
+.comp {
   border-radius: 5px;
   padding: 5px;
-  width: 100px;
   font-size: 0.9rem;
+  background-color: #007EA7;
+  width: 120px;
+  padding: 5px;
+  margin-bottom: 10px;
 }
 </style>
