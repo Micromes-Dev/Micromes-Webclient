@@ -29,7 +29,7 @@ export interface GuildChannel extends Channel{
 }
 
 export interface MessageChannel extends Channel{
-  messages: Array<Message>
+  messageUUIDs: Array<string>
 }
 
 export interface PrivateChannel extends Channel{
@@ -47,15 +47,14 @@ export interface User extends Entity{
   status: Status
   profilePictureLocation: string
 
-  channels: Array<Channel>
-  privateChannels: Array<PrivateChannel>
-  publicChannels: Array<PublicChannel>
-  guilds: Array<Guild>
+  channelUUIDs: Array<string>
+  privateChannelUUIDs: Array<string>
+  publicChannelUUIDs: Array<string>
 }
 
 export interface Guild extends Entity{
   name: string
-  channels: Array<GuildChannel>
+  channelUUIDs: Array<string>
 }
 
 export enum Status{
