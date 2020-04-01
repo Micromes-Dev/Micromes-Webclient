@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="padded middledark">
     <p>Channels</p><br/>
     <ChannelComp 
       v-for="channel in channels"
@@ -34,7 +34,4 @@ export default class ChannelColumn extends Vue {
 </script>
 
 <style scoped>
-.container{
-  padding: 5px;
-}
 </style>

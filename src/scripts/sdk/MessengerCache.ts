@@ -1,7 +1,7 @@
 import { User, Guild, Message, Channel, MessageChannel } from './Interfaces';
 
 export default class Cache {
-  jwtData: string = ""
+  decodedJWTData: string = ""
   curGuild: Guild | undefined
   curUser: User | undefined
   users: Map<string, User> = new Map()

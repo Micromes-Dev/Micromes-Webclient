@@ -10,7 +10,7 @@ export interface ChannelContent extends Entity{
 export interface Message extends Entity{
   content: string
   dateTime: string
-  author: User
+  authorID: string
 }
 //#endregion
 

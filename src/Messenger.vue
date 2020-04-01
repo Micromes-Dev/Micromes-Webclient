@@ -14,9 +14,7 @@ import { User } from "./scripts/sdk/Interfaces"
 
 @Component({
   components: {
-    Route,
     GuildBar,
-    User,
     GuildComp
   }
 })
@@ -33,13 +31,15 @@ export default class Messenger extends Vue {
   }
 
   mounted() {
-    var cookie: string = this.getCookie("micromesJWt")
-    var encodedJWTData = cookie.substring(
+    var cookie: string | undefined = this.getCookie("micromesJWt")
+    var encodedJWTData = (cookie)?cookie.substring(
       cookie.indexOf(".") + 1,
       cookie.lastIndexOf(".")
-    )
+    ): ""
     var decodedJWTData = atob(encodedJWTData)
-    this.$store.state.cache.jwtData = decodedJWTData
+    console.log(decodedJWTData)
+    console.log(cookie)
+    this.$store.state.cache.decodedJWTData = decodedJWTData
   }
 
   @Watch("$route", { immediate: true, deep: true })
@@ -68,15 +68,16 @@ export default class Messenger extends Vue {
 }
 
 .padded {
-  padding-top: 15px;
-  padding-left: 5px;
-  padding-right: 5px;
+  padding-top: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 .light { background-color: #00A7E1;}
 .dark { background-color: #00171F;}
 .middledark { background-color: #003459;}
 .cyan { background-color: #007EA7;}
+.white { background-color: white;}
 </style>
 
 <style scoped>

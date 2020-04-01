@@ -50,8 +50,7 @@
   function signUp() {
     axios.defaults.headers.common['Authorization'] = `Bearer ${id_token}`
     var username = document.getElementById("usernameInput").value
-    axios.post(`/auth/createUser?name=${username}`, { "action": "dashboard" }, {
-    })
+    axios.post(`/auth/createUser?name=${username}`, { "action": "dashboard" }, {})
       .then(function (response) {
         setCookie("micromesJWt", response.data, 7)
         document.getElementById("returnValue").innerHTML = "Created User " + username + ". You´re going to be redirected to main page"

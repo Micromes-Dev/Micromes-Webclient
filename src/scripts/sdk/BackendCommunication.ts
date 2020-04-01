@@ -2,7 +2,7 @@ import { User } from "./Interfaces"
 
 const axios = require("axios")
 
-function getCookie(name: string) : string | undefined{
+function getCookie(name: string): string | undefined {
   var nameEQ = name + "=";
   var ca = document.cookie.split(';');
   for (var i = 0; i < ca.length; i++) {
@@ -16,13 +16,17 @@ function getCookie(name: string) : string | undefined{
 export default class BackendCommunicator {
   jwtToken: string = ""
 
-  constructor(jwtToken: string){
+  constructor(jwtToken: string) {
     this.jwtToken = jwtToken
     this.setAuthorizationHeader()
   }
 
   setAuthorizationHeader() {
     axios.defaults.headers.common['Authorization'] = `Bearer ${this.jwtToken}`
+  }
+
+  sendGraphlQLQuery(query: string): Promise<Response>{
+    return axios.post('/api', `{"query": "${query}"}`)
   }
 
   getBackendCurrentUser(): User {

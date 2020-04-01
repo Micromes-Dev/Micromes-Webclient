@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container middledark padded">
     Users
   </div>
 </template>
@@ -19,6 +19,5 @@ export default class UserColumn extends Vue {
 <style scoped>
 .container{
   width: 100%;
-  background-color: dodgerblue;
 }
 </style>
