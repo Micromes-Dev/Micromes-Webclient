@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import Cache from '../scripts/sdk/Cache';
+import Cache from '../scripts/sdk/MessengerCache';
 
 Vue.use(Vuex)
 
