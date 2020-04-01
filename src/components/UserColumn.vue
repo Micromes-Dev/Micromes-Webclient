@@ -7,7 +7,11 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator"
 
-@Component
+@Component({
+  components:{
+    
+  }
+})
 export default class UserColumn extends Vue {
 }
 </script>

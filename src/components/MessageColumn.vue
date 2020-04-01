@@ -6,8 +6,13 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator"
+import {Message } from "../scripts/sdk/Interfaces"
 
-@Component
+@Component({
+  components:{
+    Message
+  }
+})
 export default class MessageColumn extends Vue {
 }
 </script>
