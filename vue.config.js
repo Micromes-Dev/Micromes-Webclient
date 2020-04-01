@@ -8,10 +8,14 @@ module.exports = {
       '/api': {
         target: 'http://micromes.net:8090',
         changeOrigin: true, // so CORS doesn't bite us. 
+        xfwd: true,
+        pathRewrite: {'^/api/': '/'},
       },
       '/auth': {
         target: 'http://micromes.net:8091',
         changeOrigin: true, // so CORS doesn't bite us. 
+        xfwd: true,
+        pathRewrite: {'^/auth/': '/'},
       },
     }
   },
