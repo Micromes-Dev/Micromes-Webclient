@@ -10,6 +10,20 @@
   <title><%= htmlWebpackPlugin.options.title %></title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src="https://kit.fontawesome.com/b4d42a0f9c.js" crossorigin="anonymous"></script>
+  <script>
+    function getCookie(name) {
+      var nameEQ = name + "=";
+      var ca = document.cookie.split(';');
+      for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+      }
+      return null;
+    }
+
+    if(getCookie("micromesJWt") == null) window.location.href = "/googleLogIn.html"
+  </script>
 </head>
 
 <body>
