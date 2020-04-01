@@ -73,6 +73,7 @@ export default class Messenger extends Vue {
 
 <style scoped>
 .tableContainer {
+  display: flex;
   color: white;
   width: 100%;
   grid-template-columns: auto auto;
@@ -80,7 +81,7 @@ export default class Messenger extends Vue {
 }
 
 .column {
-  display: inline-grid;
+  display: flexbox;
 }
 
 .left.guildbar {

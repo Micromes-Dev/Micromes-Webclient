@@ -19,6 +19,6 @@ export default class UserColumn extends Vue {
 <style scoped>
 .container{
   width: 100%;
-  background-color: darkkhaki;
+  background-color: dodgerblue;
 }
 </style>

@@ -29,12 +29,13 @@ export default class GuildComp extends Vue {
 <style scoped>
 
 .tableContainer {
+  display: flex;
   width: 100%;
   grid-template-columns: 20% auto 10%;
   grid-template-rows: auto;
 }
 
 .column {
-  display: block;
+  display: flexbox;
 }
 </style>
