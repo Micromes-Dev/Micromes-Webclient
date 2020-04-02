@@ -1,16 +1,29 @@
-<template>
-  <div class="comp lightblue">
+<template> 
+  <div>
+    <div class="indicator white" v-if="activated"/>
+    <div class="miniindic white" v-if="hover && !activated"/>
+    <div class="comp lightblue marg">
     #{{ channel.name }}
+    </div>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop } from "vue-property-decorator"
+import { Component, Vue, Prop, Watch } from "vue-property-decorator"
 import { Channel } from '../scripts/sdk/Interfaces'
 
 @Component
 export default class ChannelComp extends Vue {
-    @Prop({ required: true }) private channel: Channel
+  @Prop({ required: true }) private channel: Channel
+
+  private activated: boolean = false
+  private hover: boolean = false
+
+  @Watch('$route', { immediate: true, deep: true })
+  onUrlChange(newVal: any) {
+    this.activated = this.$route.params.channelID == this.channel.uuid
+  }
+
 }
 </script>
 

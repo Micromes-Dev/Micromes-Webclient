@@ -1,9 +1,8 @@
-import { User, Guild, Message, Channel, MessageChannel } from './Interfaces';
+import { User, Guild, Message, Channel, MessageChannel, Status } from './Interfaces';
 
 export default class Cache {
   decodedJWTData: string = ""
-  curGuild: Guild | undefined
-  curUser: User | undefined
+  curUser: User = {uuid: "", name: "", status: Status.OFFLINE, profilePictureLocation: ""}
   users: Map<string, User> = new Map()
   guilds: Map<string, Guild> = new Map()
   channels: Map<string, Channel> = new Map()
@@ -31,6 +30,10 @@ export default class Cache {
   getGuild(uuid: string): Guild | undefined {
     if (this.guilds)
       return this.guilds.get(uuid)
+  }
+
+  getGuilds(): Array<Guild>{
+    return Array.from(this.guilds.values());
   }
 
   getChannel(channelId: string): Channel | undefined {

@@ -2,7 +2,8 @@
 <!--script import and meta-->
 
 <head>
-  <meta name="google-signin-client_id" content="1025113353398-pb40di8kma99osibf68j8ov8fqvddr96.apps.googleusercontent.com">
+  <meta name="google-signin-client_id"
+    content="1025113353398-pb40di8kma99osibf68j8ov8fqvddr96.apps.googleusercontent.com">
   <script src="https://apis.google.com/js/platform.js" async defer></script>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
@@ -50,14 +51,18 @@
   function signUp() {
     axios.defaults.headers.common['Authorization'] = `Bearer ${id_token}`
     var username = document.getElementById("usernameInput").value
+    //create user on auth server
     axios.post(`/auth/createUser?name=${username}`, { "action": "dashboard" }, {})
-      .then(function (response) {
-        setCookie("micromesJWt", response.data, 7)
-        document.getElementById("returnValue").innerHTML = "Created User " + username + ". You´re going to be redirected to main page"
-        window.location.href = "/"
+      .then(function (authResponse) {
+        //send token to core server to properly create user
+        axios.defaults.headers.common['Authorization'] = `Bearer ${authResponse.data}`
+        axios.post(`/registerUser`, { "action": "dashboard" }, {})
+        //redirect to login page to login succesful
+        document.getElementById("returnValue").innerHTML = "Created User " + username + ". You´re going to be redirected to this page again to get logged in properly"
+        window.location.href = "/googleLogIn.html"
       })
       .catch(function (error) {
-        console.error("Couldn´t connect to backend server");
+        console.error("Couldn´t connect to auth backend server");
       })
   }
 

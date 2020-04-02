@@ -1,7 +1,7 @@
 <template>
   <div id="app" class="content verticalFullWindowSize">
     <GuildBar class="column verticalFullWindowSize guildbar" />
-    <GuildComp class="column verticalFullWindowSize"/>
+    <GuildComp class="column verticalFullWindowSize" />
   </div>
 </template>
 
@@ -20,26 +20,42 @@ import { User } from "./scripts/sdk/Interfaces"
 })
 export default class Messenger extends Vue {
   getCookie(name: string): string | undefined {
-    var nameEQ = name + "="
-    var ca = document.cookie.split(";")
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(";");
     for (var i = 0; i < ca.length; i++) {
       var c = ca[i]
       while (c.charAt(0) == " ") c = c.substring(1, c.length)
       if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length)
     }
-    return null;
+    return undefined;
   }
 
-  mounted() {
-    var cookie: string | undefined = this.getCookie("micromesJWt")
-    var encodedJWTData = (cookie)?cookie.substring(
-      cookie.indexOf(".") + 1,
-      cookie.lastIndexOf(".")
-    ): ""
-    var decodedJWTData = atob(encodedJWTData)
-    console.log(decodedJWTData)
-    console.log(cookie)
-    this.$store.state.cache.decodedJWTData = decodedJWTData
+  created() {
+    var cookie: string | undefined = this.getCookie("micromesJWt");
+    var encodedJWTData = cookie
+      ? cookie.substring(cookie.indexOf(".") + 1, cookie.lastIndexOf("."))
+      : "";
+    var decodedJWTData = atob(encodedJWTData);
+    console.log(decodedJWTData);
+    console.log(cookie);
+    this.$store.state.cache.decodedJWTData = decodedJWTData;
+    this.$store.state.cache.curUser = {
+      name: "Tom",
+      status: "Online",
+      profilePictureLocation: "https://mtorials.de/stuff/universeicon0001.png"
+    };
+    this.$store.state.cache.addGuild({
+      uuid: "2",
+      channelUUIDs: [],
+      name: "Universum",
+      pictureLocation: "https://mtorials.de/stuff/universeicon0001.png"
+    });
+    this.$store.state.cache.addGuild({
+      uuid: "3",
+      channelUUIDs: [],
+      name: "Universum",
+      pictureLocation: "https://mtorials.de/stuff/universeicon0001.png"
+    });
   }
 
   @Watch("$route", { immediate: true, deep: true })
@@ -50,11 +66,10 @@ export default class Messenger extends Vue {
 </script>
 
 <style>
-
 * {
   padding: 0;
   margin: 0;
-  font-family: 'Comfortaa', cursive;
+  font-family: "Comfortaa", cursive;
   color: white;
   text-decoration: none;
 }
@@ -79,18 +94,40 @@ input {
   padding: 10px;
 }
 
-.flex { display: flex; }
-.updown { flex-direction: column;}
-.leftright { flex-direction: row;}
-.flexbox { display: flexbox;}
-.fullheight{ height: 100%;}
-.fullwidth{ width: 100%;}
+.flex {
+  display: flex;
+}
+.updown {
+  flex-direction: column;
+}
+.leftright {
+  flex-direction: row;
+}
+.flexbox {
+  display: flexbox;
+}
+.fullheight {
+  height: 100%;
+}
+.fullwidth {
+  width: 100%;
+}
 
-.light { background-color: #00A7E1;}
-.dark { background-color: #00171F;}
-.middledark { background-color: #003459;}
-.cyan { background-color: #007EA7;}
-.white { background-color: white;}
+.light {
+  background-color: #00a7e1;
+}
+.dark {
+  background-color: #00171f;
+}
+.middledark {
+  background-color: #003459;
+}
+.cyan {
+  background-color: #007ea7;
+}
+.white {
+  background-color: white;
+}
 
 .pic {
   height: 40px;
@@ -98,7 +135,13 @@ input {
   border-radius: 13px;
 }
 
-.radius { border-radius: 13px;}
+.marg {
+  margin: 7px;
+}
+
+.radius {
+  border-radius: 13px;
+}
 </style>
 
 <style scoped>
@@ -107,7 +150,7 @@ input {
   color: white;
   width: 100%;
   grid-template-columns: auto auto;
-  background-color: #00171F;
+  background-color: #00171f;
 }
 
 .column {

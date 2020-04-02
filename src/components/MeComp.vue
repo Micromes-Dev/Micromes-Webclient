@@ -1,7 +1,7 @@
 <template>
   <div class="flex leftright dark padded me">
-    <img class="left pic flexbox" src="http://mtorials.de/logo.png"/>
-    <a class="flexbox text">M'Torials</a>
+    <img class="left pic flexbox" :src="$store.state.cache.curUser.profilePictureLocation"/>
+    <a class="flexbox text">{{$store.state.cache.curUser.name}}</a>
   </div>
 </template>
 

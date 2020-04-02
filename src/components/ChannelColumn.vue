@@ -1,5 +1,5 @@
 <template>
-  <div class="padded middledark">
+  <div class="middledark">
     <ChannelComp 
       v-for="channel in channels"
       v-bind:key="channel.uuid"

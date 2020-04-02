@@ -1,9 +1,8 @@
 <template>
   <div class="scrollable noScrollbar dark flex updown">
-    <guild-bar-comp v-bind:guild="guild"/>
     <div
       class="flexbox"
-      v-for="guild in guilds"
+      v-for="guild in $store.state.cache.guilds.values()"
       :key="guild.uuid">
       <guild-bar-comp
       v-bind:key="guild.uuid"
@@ -24,26 +23,6 @@ import { Guild } from '../scripts/sdk/Interfaces';
 })
 export default class GuildBar extends Vue {
   private vue: any = Vue;
-
-  private guild: Guild = {
-    uuid: "1",
-    channelUUIDs: [],
-    name: "Universum",
-    pictureLocation: "https://mtorials.de/stuff/universeicon0001.png"
-  }
-
-  private guilds: Guild[] = [{
-    uuid: "2",
-    channelUUIDs: [],
-    name: "Universum",
-    pictureLocation: "https://mtorials.de/stuff/universeicon0001.png"
-  },
-  {
-    uuid: "3",
-    channelUUIDs: [],
-    name: "Universum",
-    pictureLocation: "https://mtorials.de/stuff/universeicon0001.png"
-  }]
 
   mounted() {
     console.log("Guild id");
