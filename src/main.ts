@@ -4,10 +4,9 @@ import './registerServiceWorker'
 import router from './router'
 import store from './store'
 const GAuth = require('vue-google-oauth2-gapi')
-
-//const GoogleAuth = require("vue-google-oauth")
-const VueSessionStorage = require("vue-sessionstorage")
 import VueCookies from "vue-cookies-ts";
+
+const VueSessionStorage = require("vue-sessionstorage")
 
 Vue.config.productionTip = false
 

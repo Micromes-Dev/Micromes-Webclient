@@ -16,7 +16,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator"
+import { Component, Vue, Watch } from "vue-property-decorator"
 import { Message, User, Guild, Channel } from "../scripts/sdk/Interfaces"
 import MessageComp from './MessageComp.vue'
 import MessageSend from './MessageSend.vue'
@@ -31,26 +31,7 @@ export default class MessageColumn extends Vue {
 
   private notSelected : boolean = true
 
-  private messages: Message[] = [
-    {
-      uuid: "1",
-      content: "Hallo",
-      dateTime: "02-03 - 8:30",
-      authorID: "asd"
-    },
-    {
-      uuid: "2",
-      content: "Guten Tag! Ich wollte mal fragen warum die Sachen die ich hier programmiert habe eigentlich so gut aussehen?",
-      dateTime: "123713",
-      authorID: "asd"
-    },
-    {
-      uuid: "3",
-      content: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. ",
-      dateTime: "123713",
-      authorID: "asd"
-    }
-  ]
+  private messages: Message[] = []
 
   getGuildName() : string {
     let a : Guild | undefined = this.$store.state.cache.getGuild(this.$route.params.guildId)
@@ -70,6 +51,17 @@ export default class MessageColumn extends Vue {
     }
     this.notSelected = false
     return a.name
+  }
+
+  @Watch('$route', { immediate: true, deep: true })
+  onUrlChange(newVal: any) {
+    var guild: Guild = this.$store.state.cache.getGuild(this.$route.params.guildId)
+    var channel: Channel = this.$store.state.cache.getChannel(this.$route.params.channelId)
+    this.messages = this.$store.state.cache.getMessages(channel)
+  }
+
+  mounted(){
+    //this.messages = this.$store.state.cache.getMessages(this.$route.params.guildId)
   }
 }
 </script>

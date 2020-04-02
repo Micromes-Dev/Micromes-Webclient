@@ -1,4 +1,5 @@
-import { User } from "./Interfaces"
+import { User, Status } from "./Interfaces"
+import MessengerCache from "./MessengerCache"
 
 const axios = require("axios")
 
@@ -16,20 +17,40 @@ function getCookie(name: string): string | undefined {
 export default class BackendCommunicator {
   jwtToken: string = ""
 
-  constructor(jwtToken: string) {
-    this.jwtToken = jwtToken
-    this.setAuthorizationHeader()
-  }
-
   setAuthorizationHeader() {
     axios.defaults.headers.common['Authorization'] = `Bearer ${this.jwtToken}`
   }
 
-  sendGraphlQLQuery(query: string): Promise<Response>{
-    return axios.post('/api', `{"query": "${query}"}`)
+  sendGraphlQLQuery(query: string): Promise<Response> {
+    return axios.post('/api', `{"query": "${query}"}`, {})
   }
 
-  getBackendCurrentUser(): User {
+  getBackendCurrentUser(cache: MessengerCache) {
+    this.jwtToken = cache.token
+    this.setAuthorizationHeader()
+
+    this.sendGraphlQLQuery(
+      `query{
+        me
+        {
+          name,
+          profilePictureLocation,
+          id,
+          status
+        }
+      }`).then(function (response: Response) {
+        console.log(response)
+
+        var user: User = {
+          name: "",
+          id: "",
+          profilePictureLocation: "",
+          status: Status.OFFLINE
+        }
+        cache.curUser = user
+      }).catch(function(error: Error){
+
+      })
 
   }
 }

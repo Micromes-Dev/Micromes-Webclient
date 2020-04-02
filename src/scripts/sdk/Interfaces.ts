@@ -1,5 +1,5 @@
 export interface Entity{
-  uuid: string
+  id: string
 }
 
 //#region messages
@@ -29,7 +29,7 @@ export interface GuildChannel extends Channel{
 }
 
 export interface MessageChannel extends Channel{
-  messageUUIDs: Array<string>
+  messageIDs: Array<string>
 }
 
 export interface PrivateChannel extends Channel{
@@ -50,7 +50,7 @@ export interface User extends Entity{
 
 export interface Guild extends Entity{
   name: string
-  channelUUIDs: Array<string>
+  channelIDs: Array<string>
   pictureLocation: string
 }
 

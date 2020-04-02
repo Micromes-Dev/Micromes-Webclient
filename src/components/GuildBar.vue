@@ -25,10 +25,6 @@ export default class GuildBar extends Vue {
   private vue: any = Vue;
 
   mounted() {
-    console.log("Guild id");
-    console.log(this.$route.params);
-    if (this.$route.params.guildId != null)
-      console.log(this.$route.params.guildId);
   }
 }
 </script>

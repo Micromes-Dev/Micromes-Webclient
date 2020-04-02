@@ -20,12 +20,12 @@ export default class ChannelComp extends Vue {
   private hover: boolean = false
 
   changeChannel() {
-    this.$router.push({ path: `/${this.$route.params.guildId}/${this.channel.uuid}` })
+    this.$router.push({ path: `/${this.$route.params.guildId}/${this.channel.id}` })
   }
 
   @Watch('$route', { immediate: true, deep: true })
   onUrlChange(newVal: any) {
-    this.activated = this.$route.params.channelId == this.channel.uuid
+    this.activated = this.$route.params.channelId == this.channel.id
   }
 }
 </script>

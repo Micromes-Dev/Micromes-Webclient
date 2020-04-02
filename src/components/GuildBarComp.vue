@@ -20,12 +20,12 @@ export default class GuildBarComp extends Vue {
   private hover: boolean = false
 
   redirect(){
-    window.location.href = "/#/" + this.guild.uuid + "/0";
+    window.location.href = "/#/" + this.guild.id + "/0";
   }
 
   @Watch('$route', { immediate: true, deep: true })
   onUrlChange(newVal: any) {
-    this.activated = this.$route.params.guildId == this.guild.uuid
+    this.activated = this.$route.params.guildId == this.guild.id
   }
 }
 </script>

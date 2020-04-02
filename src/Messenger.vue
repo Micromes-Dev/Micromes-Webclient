@@ -11,6 +11,9 @@ import { Route } from "vue-router"
 import GuildBar from "./components/GuildBar.vue"
 import GuildComp from "@/components/GuildComp.vue"
 import { User } from "./scripts/sdk/Interfaces"
+import BackendCommunicator from "./scripts/sdk/BackendCommunication"
+
+const backendCom: BackendCommunicator = new BackendCommunicator()
 
 @Component({
   components: {
@@ -31,41 +34,66 @@ export default class Messenger extends Vue {
   }
 
   created() {
+    //#region set variables
     var cookie: string | undefined = this.getCookie("micromesJWt");
     var encodedJWTData = cookie
       ? cookie.substring(cookie.indexOf(".") + 1, cookie.lastIndexOf("."))
       : "";
     var decodedJWTData = atob(encodedJWTData);
-    console.log(decodedJWTData);
+    this.$store.state.cache.decodedJWTData = decodedJWTData
+    this.$store.state.cache.token = cookie
+    //#endregion
+    
     console.log(cookie);
-    this.$store.state.cache.decodedJWTData = decodedJWTData;
+
     this.$store.state.cache.curUser = {
       name: "Tom",
       status: "Online",
       profilePictureLocation: "https://mtorials.de/stuff/universeicon0001.png"
     };
     this.$store.state.cache.addGuild({
-      uuid: "2",
-      channelUUIDs: [],
+      id: "2",
+      channelIDs: ["1"],
       name: "Universum",
       pictureLocation: "https://mtorials.de/stuff/universeicon0001.png"
     });
     this.$store.state.cache.addGuild({
-      uuid: "3",
-      channelUUIDs: [],
+      id: "3",
+      channelIDs: ["1", "2"],
       name: "Another Universe",
       pictureLocation: "https://mtorials.de/stuff/universeicon0001.png"
     });
     this.$store.state.cache.addChannel({
       name: "text",
       checksum: 1,
-      uuid: "2"
+      id: "2",
+      messageIDs: ["1", "2"]
     })
+    this.$store.state.cache.addChannel({
+      name: "hallo",
+      checksum: 1,
+      id: "1",
+      messageIDs: ["1", "2"]
+    })
+    this.$store.state.cache.addMessage({
+      id: "2",
+      content: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. ",
+      dateTime: "123713",
+      authorID: "1"
+    })
+    this.$store.state.cache.addMessage({
+      id: "1",
+      content: "I am very pretty",
+      dateTime: "123713",
+      authorID: "1"
+    })
+
+    backendCom.getBackendCurrentUser(this.$store.state.cache)
   }
 
   @Watch("$route", { immediate: true, deep: true })
   onURLChange(route: Route) {
-    this.$store.state.cache.curGuild = route.params.guildId
+    this.$store.state.cache.curGuild = this.$store.state.cache.getGuild(route.params.guildId)
   }
 }
 </script>
