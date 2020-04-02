@@ -51,6 +51,7 @@ export interface User extends Entity{
 export interface Guild extends Entity{
   name: string
   channelUUIDs: Array<string>
+  pictureLocation: string
 }
 
 export enum Status{

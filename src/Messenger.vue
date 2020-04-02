@@ -97,6 +97,8 @@ input {
   width: 40px;
   border-radius: 13px;
 }
+
+.radius { border-radius: 13px;}
 </style>
 
 <style scoped>

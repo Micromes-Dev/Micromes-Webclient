@@ -1,28 +1,49 @@
 <template>
-  <div class="guildbar panel verticalFullWindowSize scrollable noScrollbar dark">
-    <ul>
-      <li>
-        <GuildBarGuild
-          name="test"
-          pictureURL="https://yt3.ggpht.com/a-/AOh14GgRrZ6dNfb8p4jwooTDk5sQz55Rn6HwHI3RkhcLmBs=s88-c-k-c0xffffffff-no-rj-mo"
-          uuid="kjköljhgL"
-        />
-      </li>
-    </ul>
+  <div class="scrollable noScrollbar dark flex updown">
+    <guild-bar-comp v-bind:guild="guild"/>
+    <div
+      class="flexbox"
+      v-for="guild in guilds"
+      :key="guild.uuid">
+      <guild-bar-comp
+      v-bind:key="guild.uuid"
+      v-bind:guild="guild"/>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import GuildBarGuild from "@/components/GuildBarGuild.vue";
+import GuildBarComp from "@/components/GuildBarComp.vue";
+import { Guild } from '../scripts/sdk/Interfaces';
 
 @Component({
   components: {
-    GuildBarGuild
+    GuildBarComp
   }
 })
 export default class GuildBar extends Vue {
   private vue: any = Vue;
+
+  private guild: Guild = {
+    uuid: "1",
+    channelUUIDs: [],
+    name: "Universum",
+    pictureLocation: "https://mtorials.de/stuff/universeicon0001.png"
+  }
+
+  private guilds: Guild[] = [{
+    uuid: "2",
+    channelUUIDs: [],
+    name: "Universum",
+    pictureLocation: "https://mtorials.de/stuff/universeicon0001.png"
+  },
+  {
+    uuid: "3",
+    channelUUIDs: [],
+    name: "Universum",
+    pictureLocation: "https://mtorials.de/stuff/universeicon0001.png"
+  }]
 
   mounted() {
     console.log("Guild id");
@@ -34,11 +55,6 @@ export default class GuildBar extends Vue {
 </script>
 
 <style scoped>
-.guildbar.panel {
-  height: 100vh;
-  display: inline-block;
-  text-decoration: none;
-}
 
 .scrollable {
   overflow-y: scroll;
