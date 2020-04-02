@@ -2,7 +2,7 @@
   <div class="flex leftright dark user">
     <img class="left pic flexbox" :src="user.profilePictureLocation"/>
     <div class="flexbox text">
-        <a>{{ user.name }}</a><br/>
+        <a><nobr>{{ user.name }}</nobr></a><br/>
         <a class="tiny">{{ status }}</a>
     </div>
   </div>
@@ -21,8 +21,6 @@ export default class UserComp extends Vue {
 
 <style scoped>
 .left {
-    width: 40px;
-    height: 40px;
     margin-right: 10px;
 }
 .tiny {
@@ -35,5 +33,7 @@ export default class UserComp extends Vue {
 }
 .text {
     line-height: 20px;
+    max-width: 150px;
+    overflow: hidden;
 }
 </style>

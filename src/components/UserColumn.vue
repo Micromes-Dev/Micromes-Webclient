@@ -36,6 +36,12 @@ export default class UserColumn extends Vue {
       status: Status.ONLINE,
       name: "berl",
       profilePictureLocation: "http://b-erler.de/pic/berl.jpg"
+    },
+    {
+      uuid: "3",
+      status: Status.IDLE,
+      name: "user with a name waaaay toooo long",
+      profilePictureLocation: "https://mtorials.de/stuff/bg1.png"
     }
   ]
 }
