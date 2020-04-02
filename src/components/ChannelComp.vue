@@ -1,9 +1,9 @@
 <template> 
-  <div>
+  <div class="flex">
     <div class="indicator white" v-if="activated"/>
     <div class="miniindic white" v-if="hover && !activated"/>
-    <div class="comp lightblue marg">
-    #{{ channel.name }}
+    <div class="comp lightblue marg" @click="changeChannel" @mouseover="hover = true" @mouseleave="hover = false">
+      #{{ channel.name }}
     </div>
   </div>
 </template>
@@ -19,11 +19,14 @@ export default class ChannelComp extends Vue {
   private activated: boolean = false
   private hover: boolean = false
 
-  @Watch('$route', { immediate: true, deep: true })
-  onUrlChange(newVal: any) {
-    this.activated = this.$route.params.channelID == this.channel.uuid
+  changeChannel() {
+    this.$router.push({ path: `/${this.$route.params.guildId}/${this.channel.uuid}` })
   }
 
+  @Watch('$route', { immediate: true, deep: true })
+  onUrlChange(newVal: any) {
+    this.activated = this.$route.params.channelId == this.channel.uuid
+  }
 }
 </script>
 
@@ -36,5 +39,21 @@ export default class ChannelComp extends Vue {
   width: 120px;
   padding: 5px;
   margin-bottom: 10px;
+}
+
+.indicator {
+  height: 30px;
+  width: 5px;
+  margin: auto;
+  border-bottom-right-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.miniindic {
+  height: 18px;
+  width: 5px;
+  margin: auto;
+  border-bottom-right-radius: 10px;
+  border-top-right-radius: 10px;
 }
 </style>
