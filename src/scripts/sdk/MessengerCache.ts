@@ -22,6 +22,11 @@ export default class Cache {
       this.guilds.set(guild.uuid, guild)
   }
 
+  addChannel(channel: Channel) {
+    if (this.channels)
+      this.channels.set(channel.uuid, channel)
+  }
+
   getUser(uuid: string): User | undefined {
     if (this.users)
       return this.users.get(uuid)
@@ -67,6 +72,4 @@ export default class Cache {
     }
     return channels
   }
-
-
 }

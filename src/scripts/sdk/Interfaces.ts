@@ -16,8 +16,8 @@ export interface Message extends Entity{
 
 //#region Channels
 export interface Channel extends Entity{
-  name: String
-  checksum: Number
+  name: string
+  checksum: number
 }
 
 export interface ContentChannel extends Channel{

@@ -53,9 +53,14 @@ export default class Messenger extends Vue {
     this.$store.state.cache.addGuild({
       uuid: "3",
       channelUUIDs: [],
-      name: "Universum",
+      name: "Another Universe",
       pictureLocation: "https://mtorials.de/stuff/universeicon0001.png"
     });
+    this.$store.state.cache.addChannel({
+      name: "text",
+      checksum: 1,
+      uuid: "2"
+    })
   }
 
   @Watch("$route", { immediate: true, deep: true })

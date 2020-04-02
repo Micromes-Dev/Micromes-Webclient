@@ -1,7 +1,7 @@
 <template>
   <div class="middledark">
     <ChannelComp 
-      v-for="channel in channels"
+      v-for="channel in getChannels()"
       v-bind:key="channel.uuid"
       v-bind:channel="channel"/>
   </div>
@@ -18,17 +18,11 @@ import ChannelComp from './ChannelComp.vue'
   }
 })
 export default class ChannelColumn extends Vue {
-  private channels : Channel[] = 
-  [{
-    name: "welcome",
-    checksum: 1,
-    uuid: "1"
-  },
-  {
-    name: "text",
-    checksum: 1,
-    uuid: "2"
-  }]
+
+  getChannels() : Array<Channel>{
+    let a = this.$store.state.cache.getChannels(this.$store.state.cache.getGuild(this.$route.params.guildId))
+    return a
+  }
 }
 </script>
 

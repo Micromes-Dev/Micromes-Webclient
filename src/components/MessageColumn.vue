@@ -1,12 +1,15 @@
 <template>
-  <div class="container dark padded">
-    <div class="top">
+  <div class="flex updown dark">
+    <div class="flexbox middledark padded">
+      {{ getGuildName() }} / {{ getChannelName()}}
+    </div>
+    <div class="flexbox fullheight padded">
       <message-comp
         v-for="message in messages"
         v-bind:key="message.uuid"
         v-bind:message="message"/>
     </div>
-    <div class="down">
+    <div class="flexbox padded">
       <message-send/>
     </div>
   </div>
@@ -14,7 +17,7 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator"
-import { Message, User } from "../scripts/sdk/Interfaces"
+import { Message, User, Guild, Channel } from "../scripts/sdk/Interfaces"
 import MessageComp from './MessageComp.vue'
 import MessageSend from './MessageSend.vue'
 
@@ -25,6 +28,9 @@ import MessageSend from './MessageSend.vue'
   }
 })
 export default class MessageColumn extends Vue {
+
+  private notSelected : boolean = true
+
   private messages: Message[] = [
     {
       uuid: "1",
@@ -45,20 +51,29 @@ export default class MessageColumn extends Vue {
       authorID: "asd"
     }
   ]
+
+  getGuildName() : string {
+    let a : Guild | undefined = this.$store.state.cache.getGuild(this.$route.params.guildId)
+    if (a == undefined) {
+      this.notSelected = true
+      return "-"
+    }
+    this.notSelected = false
+    return a.name
+  }
+
+  getChannelName() : string {
+    let a : Channel | undefined = this.$store.state.cache.getChannel(this.$route.params.channelId)
+    if (a == undefined) {
+      this.notSelected = true
+      return "-"
+    }
+    this.notSelected = false
+    return a.name
+  }
 }
 </script>
 
 <style scoped>
-.container{
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-}
-.top {
-  display: flexbox;
-  height: 100%;
-}
-.down {
-  display: flexbox;
-}
+
 </style>
