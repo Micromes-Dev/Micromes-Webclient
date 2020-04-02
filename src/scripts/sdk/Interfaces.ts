@@ -46,10 +46,6 @@ export interface User extends Entity{
   name: string
   status: Status
   profilePictureLocation: string
-
-  channelUUIDs: Array<string>
-  privateChannelUUIDs: Array<string>
-  publicChannelUUIDs: Array<string>
 }
 
 export interface Guild extends Entity{

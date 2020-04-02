@@ -1,7 +1,7 @@
 <template>
   <div class="padded msg">
     <div class="left">
-      <img class="pb" v-bind:src="getPictureLocationForID(message.authorID)"/>
+      <img class="pic" v-bind:src="getPictureLocationForID(message.authorID)"/>
     </div>
     <div class="right">
       <a class="tiny"><i>{{ getUserNameForID(message.authorID) }}, {{ message.dateTime }}</i></a><br/>
@@ -34,11 +34,11 @@ export default class MessageComp extends Vue {
 .left {
   display: flexbox;
   margin-right: 10px;
+  padding-top: 2px;
 }
 .right {
   width: 100%;
   display: flexbox;
-  padding-top: 7px;
 }
 .msg {
   display: flex;
@@ -48,9 +48,6 @@ export default class MessageComp extends Vue {
   font-size: 0.75rem;
 }
 .seperator {
-  margin-bottom: 5px;
-}
-.pb {
-  width: 60px;
+  margin-bottom: 4px;
 }
 </style>

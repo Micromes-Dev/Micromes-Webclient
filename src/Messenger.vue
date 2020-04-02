@@ -76,16 +76,27 @@ input {
 }
 
 .padded {
-  padding-top: 10px;
-  padding-left: 10px;
-  padding-right: 10px;
+  padding: 10px;
 }
+
+.flex { display: flex; }
+.updown { flex-direction: column;}
+.leftright { flex-direction: row;}
+.flexbox { display: flexbox;}
+.fullheight{ height: 100%;}
+.fullwidth{ width: 100%;}
 
 .light { background-color: #00A7E1;}
 .dark { background-color: #00171F;}
 .middledark { background-color: #003459;}
 .cyan { background-color: #007EA7;}
 .white { background-color: white;}
+
+.pic {
+  height: 40px;
+  width: 40px;
+  border-radius: 13px;
+}
 </style>
 
 <style scoped>

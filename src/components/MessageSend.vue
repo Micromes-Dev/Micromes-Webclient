@@ -1,7 +1,7 @@
 <template>
-  <div class="sender">
-    <input type="text" class="cyan text"/>
-    <input type="submit" class="cyan button" value="send"/>
+  <div class="sender flex leftright">
+    <input type="text" class="cyan text flexbox fullwidth"/>
+    <input type="submit" class="cyan button flexbox" value="send"/>
   </div>
 </template>
 
@@ -9,25 +9,5 @@
 import { Component, Vue, Prop } from "vue-property-decorator"
 
 @Component
-export default class MessageSend extends Vue {
-
-}
-
+export default class MessageSend extends Vue {}
 </script>
-
-<style scoped>
-
-.sender {
-  display: flex;
-  flex-direction: row;
-  margin-bottom: 7px;
-}
-.text {
-  width: 100%;
-  display: flexbox;
-}
-
-.button {
-  display: flexbox;
-}
-</style>

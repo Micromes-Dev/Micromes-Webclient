@@ -1,6 +1,5 @@
 <template>
   <div class="container dark padded">
-    Messages
     <div class="top">
       <message-comp
         v-for="message in messages"
@@ -30,7 +29,7 @@ export default class MessageColumn extends Vue {
     {
       uuid: "1",
       content: "Hallo",
-      dateTime: "123713",
+      dateTime: "02-03 - 8:30",
       authorID: "asd"
     },
     {
