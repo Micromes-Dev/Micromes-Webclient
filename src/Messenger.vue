@@ -67,6 +67,14 @@ export default class Messenger extends Vue {
   height: 100vh;
 }
 
+input {
+  border: none;
+  outline: none;
+  border-radius: 10px;
+  padding: 6px;
+  margin: 5px;
+}
+
 .padded {
   padding-top: 10px;
   padding-left: 10px;

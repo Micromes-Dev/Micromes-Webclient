@@ -1,11 +1,15 @@
 <template>
   <div class="container dark padded">
     Messages
-    <message-comp
-      v-for="message in messages"
-      v-bind:key="message.uuid"
-      v-bind:message="message"/>
-    <message-send/>
+    <div class="top">
+      <message-comp
+        v-for="message in messages"
+        v-bind:key="message.uuid"
+        v-bind:message="message"/>
+    </div>
+    <div class="down">
+      <message-send/>
+    </div>
   </div>
 </template>
 
@@ -34,8 +38,16 @@ export default class MessageColumn extends Vue {
 </script>
 
 <style scoped>
-
 .container{
   width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.top {
+  display: flexbox;
+  height: 100%;
+}
+.down {
+  display: flexbox;
 }
 </style>
