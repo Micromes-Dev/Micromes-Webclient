@@ -54,6 +54,6 @@ export interface Guild extends Entity{
 }
 
 export enum Status{
-  ONLINE, OFFLINE, DND, IDLE
+  ONLINE = "ONLINE", OFFLINE = "OFFLINE", DND = "DND", IDLE = "IDLE"
 }
 

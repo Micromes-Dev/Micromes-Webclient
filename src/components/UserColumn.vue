@@ -23,7 +23,7 @@ import { User, Status } from '../scripts/sdk/Interfaces'
     UserComp
   }
 })
-export default class MeComp extends Vue {
+export default class UserColumn extends Vue {
   private users: User[] = [
     {
       uuid: "1",
@@ -35,7 +35,7 @@ export default class MeComp extends Vue {
       uuid: "2",
       status: Status.ONLINE,
       name: "berl",
-      profilePictureLocation: "https://mtorials.de/stuff/bg1.png"
+      profilePictureLocation: "http://b-erler.de/pic/berl.jpg"
     }
   ]
 }

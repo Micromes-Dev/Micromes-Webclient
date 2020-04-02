@@ -9,7 +9,7 @@
 import { Component, Vue } from "vue-property-decorator"
 
 @Component
-export default class UserColumn extends Vue {
+export default class MeComp extends Vue {
 }
 </script>
 
