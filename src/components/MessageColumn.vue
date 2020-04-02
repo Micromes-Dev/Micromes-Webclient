@@ -32,6 +32,12 @@ export default class MessageColumn extends Vue {
       content: "Hallo",
       dateTime: "123713",
       authorID: "asd"
+    },
+    {
+      uuid: "2",
+      content: "Guten Tag! Ich wollte mal fragen warum die Sachen die ich hier programmiert habe eigentlich so gut aussehen?",
+      dateTime: "123713",
+      authorID: "asd"
     }
   ]
 }

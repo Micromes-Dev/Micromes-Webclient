@@ -20,6 +20,7 @@ export default class MessageSend extends Vue {
 .sender {
   display: flex;
   flex-direction: row;
+  margin-bottom: 7px;
 }
 .text {
   width: 100%;
