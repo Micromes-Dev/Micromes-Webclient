@@ -1,7 +1,7 @@
 <template>
   <div class="flex updown dark">
     <div class="flexbox middledark padded">
-      {{ getGuildName() }} / {{ getChannelName()}}
+      {{ getGuildName() }} / {{ getChannelName() }}
     </div>
     <div class="flexbox fullheight padded">
       <message-comp
@@ -55,13 +55,8 @@ export default class MessageColumn extends Vue {
 
   @Watch('$route', { immediate: true, deep: true })
   onUrlChange(newVal: any) {
-    var guild: Guild = this.$store.state.cache.getGuild(this.$route.params.guildId)
-    var channel: Channel = this.$store.state.cache.getChannel(this.$route.params.channelId)
-    this.messages = this.$store.state.cache.getMessages(channel)
-  }
-
-  mounted(){
-    //this.messages = this.$store.state.cache.getMessages(this.$route.params.guildId)
+    this.$store.dispatch('fetchMessagesForChannel', this.$route.params.channelId)
+    this.messages = this.$store.state.messagesByChannel.get(this.$route.params.channelId)
   }
 }
 </script>

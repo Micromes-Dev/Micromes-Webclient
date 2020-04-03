@@ -41,9 +41,9 @@ export default class Messenger extends Vue {
       : "";
     var decodedJWTData = atob(encodedJWTData);
     this.$store.state.cache.decodedJWTData = decodedJWTData
-    this.$store.state.cache.token = cookie
+    this.$store.dispatch('setAuthHeader', cookie)
     //#endregion
-    
+
     console.log(cookie);
 
     this.$store.state.cache.curUser = {
@@ -87,8 +87,6 @@ export default class Messenger extends Vue {
       dateTime: "123713",
       authorID: "1"
     })
-
-    backendCom.getBackendCurrentUser(this.$store.state.cache)
   }
 
   @Watch("$route", { immediate: true, deep: true })

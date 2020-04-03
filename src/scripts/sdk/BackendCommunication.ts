@@ -1,7 +1,6 @@
 import { User, Status } from "./Interfaces"
 import Vuex, { Store } from 'vuex'
 import MessengerCache from "./MessengerCache"
-import { Field, Int, ObjectType } from "type-graphql"
 
 const axios = require("axios")
 
@@ -17,42 +16,42 @@ function getCookie(name: string): string | undefined {
 }
 
 export default class BackendCommunicator {
-  jwtToken: string = ""
 
-  setAuthorizationHeader() {
-    axios.defaults.headers.common['Authorization'] = `Bearer ${this.jwtToken}`
+  setAuthorizationHeader(token: string) {
+    console.log("Token is now " + token)
+    axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
   }
 
   sendGraphlQLQuery(query: string): Promise<Response> {
     return axios.post('/api', `{"operationName":null,"variables":{},"query":"${query.replace(",", "\n").replace(/(\r\n|\n|\r)/gm, "")}"}`, {})
   }
 
-  getBackendCurrentUser(store: any) {
-    this.jwtToken = store.state.token
-    this.setAuthorizationHeader()
-
+  getBackendCurrentUser(callback : (response: Response) => void) {
     this.sendGraphlQLQuery(
       `query{
-        me
-        {
+        me {
           name,
           profilePictureLocation,
           id,
           status
         }
-      }`).then(function (response: Response) {
-        console.log(response)
-
-        var user: User = {
-          name: "",
-          id: "",
-          profilePictureLocation: "",
-          status: Status.OFFLINE
-        }
-        store.state.curUser = user
-      }).catch(function(error: Error){
-
+      }`)
+      .then(callback)
+      .catch((error: Error) => {
+          console.log(error)
       })
-
   }
+
+  getMessagesForChannel(channelID: string, callback : (response: Response) => void) {
+    this.sendGraphlQLQuery(`query{
+      messagesForChannel(channelID: '${channelID}') {
+        id,
+        content,
+        authorID
+      }
+    }`)
+    .then(callback)
+    .catch((error) => console.log(error))
+  }
+
 }
