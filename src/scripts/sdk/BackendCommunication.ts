@@ -1,5 +1,7 @@
 import { User, Status } from "./Interfaces"
+import Vuex, { Store } from 'vuex'
 import MessengerCache from "./MessengerCache"
+import { Field, Int, ObjectType } from "type-graphql"
 
 const axios = require("axios")
 
@@ -22,11 +24,11 @@ export default class BackendCommunicator {
   }
 
   sendGraphlQLQuery(query: string): Promise<Response> {
-    return axios.post('/api', `{"query": "${query}"}`, {})
+    return axios.post('/api', `{"operationName":null,"variables":{},"query":"${query.replace(",", "\n").replace(/(\r\n|\n|\r)/gm, "")}"}`, {})
   }
 
-  getBackendCurrentUser(cache: MessengerCache) {
-    this.jwtToken = cache.token
+  getBackendCurrentUser(store: any) {
+    this.jwtToken = store.state.token
     this.setAuthorizationHeader()
 
     this.sendGraphlQLQuery(
@@ -47,7 +49,7 @@ export default class BackendCommunicator {
           profilePictureLocation: "",
           status: Status.OFFLINE
         }
-        cache.curUser = user
+        store.state.curUser = user
       }).catch(function(error: Error){
 
       })
