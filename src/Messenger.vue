@@ -41,7 +41,7 @@ export default class Messenger extends Vue {
       : "";
     var decodedJWTData = atob(encodedJWTData);
     this.$store.state.cache.decodedJWTData = decodedJWTData
-    this.$store.dispatch('setAuthHeader', cookie)
+    this.$store.dispatch('initialize', cookie)
     //#endregion
 
     console.log(cookie);

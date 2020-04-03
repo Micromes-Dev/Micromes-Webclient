@@ -6,7 +6,7 @@
     <div class="flexbox fullheight padded">
       <message-comp
         v-for="message in messages"
-        v-bind:key="message.uuid"
+        v-bind:key="message.id"
         v-bind:message="message"/>
     </div>
     <div class="flexbox padded">
@@ -30,8 +30,7 @@ import MessageSend from './MessageSend.vue'
 export default class MessageColumn extends Vue {
 
   private notSelected : boolean = true
-
-  private messages: Message[] = []
+  private messages = Array<Message>()
 
   getGuildName() : string {
     let a : Guild | undefined = this.$store.state.cache.getGuild(this.$route.params.guildId)
@@ -56,7 +55,7 @@ export default class MessageColumn extends Vue {
   @Watch('$route', { immediate: true, deep: true })
   onUrlChange(newVal: any) {
     this.$store.dispatch('fetchMessagesForChannel', this.$route.params.channelId)
-    this.messages = this.$store.state.messagesByChannel.get(this.$route.params.channelId)
+    this.messages = this.$store.state.messagesByChannel.get("16")
   }
 }
 </script>

@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import Cache from '../scripts/sdk/MessengerCache';
 import { Message } from '@/scripts/sdk/Interfaces';
 import BackendCommunicator from '@/scripts/sdk/BackendCommunication';
+import { JsonDecoder } from 'ts.data.json';
 
 Vue.use(Vuex)
 
@@ -20,13 +21,13 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    setAuthHeader(context, token: string) {
-      this.state.be.setAuthorizationHeader(token)
+    initialize(context, token: string) {
+      this.state.be.initialize(token)
     },
     fetchMessagesForChannel(context, channelID: string) {
-      this.state.be.getMessagesForChannel(channelID, (response: Response) => {
-        console.log(response)
-        let msgs : Array<Message> = []
+      this.state.be.getMessagesForChannel(channelID, (response: any) => {
+        console.log(response.messagesForChannel[0])
+        let msgs : Array<Message> = response.messagesForChannel
         context.commit('saveMessagesForChannel', {
           channelID: channelID,
           messages: msgs
