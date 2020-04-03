@@ -42,7 +42,7 @@ export default class ChannelComp extends Vue {
 }
 
 .indicator {
-  height: 30px;
+  height: 20px;
   width: 5px;
   margin: auto;
   border-bottom-right-radius: 10px;
@@ -50,7 +50,7 @@ export default class ChannelComp extends Vue {
 }
 
 .miniindic {
-  height: 18px;
+  height: 15px;
   width: 5px;
   margin: auto;
   border-bottom-right-radius: 10px;
