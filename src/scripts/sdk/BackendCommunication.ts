@@ -5,7 +5,7 @@ import MessengerCache from "./MessengerCache"
 const axios = require("axios")
 
 import { GraphQLClient } from 'graphql-request'
-import { messageForChannelQuerie } from '@/queries/queries'
+import { messageForChannelQuerie, getMeQuerie } from '@/queries/queries'
 
 
 export default class BackendCommunicator {
@@ -24,15 +24,17 @@ export default class BackendCommunicator {
   }
 
   getBackendCurrentUser(callback : (response: Response) => void) {
-
+    this.graphQLClient?.request(getMeQuerie)
+    .then(data => {
+      callback(data)
+    })
+    .catch((error) => console.log(error))
   }
 
   getMessagesForChannel(channelID: string, callback : (data: any) => void) {
     this.graphQLClient?.request(messageForChannelQuerie, { id: "16" })
-    .then(data => {
-      callback(data)
-    })
-  .catch((error) => console.log(error))
+    .then(callback)
+    .catch((error) => console.log(error))
   }
 
 }

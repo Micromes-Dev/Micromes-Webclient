@@ -1,7 +1,7 @@
 <template>
   <div class="flex leftright dark padded me">
-    <img class="left pic flexbox" :src="$store.state.cache.curUser.profilePictureLocation"/>
-    <a class="flexbox text">{{$store.state.cache.curUser.name}}</a>
+    <img class="left pic flexbox" :src="$store.state.me.profilePictureLocation"/>
+    <a class="flexbox text">{{$store.state.me.name}}</a>
   </div>
 </template>
 

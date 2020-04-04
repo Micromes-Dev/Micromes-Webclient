@@ -2,11 +2,12 @@
   <div class="scrollable noScrollbar dark flex updown">
     <div
       class="flexbox"
-      v-for="guild in $store.state.cache.guilds.values()"
-      :key="guild.uuid">
+      v-for="guild in $store.state.guilds"
+      :key="guild.id">
       <guild-bar-comp
-      v-bind:key="guild.uuid"
-      v-bind:guild="guild"/>
+      v-bind:key="guild.id"
+      v-bind:guild="guild"
+      v-bind:channels="guild.channels"/>
     </div>
   </div>
 </template>
@@ -23,9 +24,6 @@ import { Guild } from '../scripts/sdk/Interfaces';
 })
 export default class GuildBar extends Vue {
   private vue: any = Vue;
-
-  mounted() {
-  }
 }
 </script>
 

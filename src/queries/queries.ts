@@ -6,3 +6,11 @@ export const messageForChannelQuerie = `query getMessagesForChannel($id: String!
     dateTime
   }
 }`
+
+export const getMeQuerie = `query {
+  me {
+    id,
+    name,
+    profilePictureLocation
+  }
+}`

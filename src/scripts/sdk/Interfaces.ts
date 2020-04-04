@@ -48,9 +48,9 @@ export interface User extends Entity{
   profilePictureLocation: string
 }
 
-export interface Guild extends Entity{
+export interface Guild extends Entity {
   name: string
-  channelIDs: Array<string>
+  channels: Channel[]
   pictureLocation: string
 }
 

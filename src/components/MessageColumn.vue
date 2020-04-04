@@ -1,11 +1,11 @@
 <template>
   <div class="flex updown dark">
     <div class="flexbox middledark padded">
-      {{ getGuildName() }} / {{ getChannelName() }}
+      {{ this.$store.state.currentGuild.name }}
     </div>
     <div class="flexbox fullheight padded">
       <message-comp
-        v-for="message in messages"
+        v-for="message in $store.getters.currentMessages"
         v-bind:key="message.id"
         v-bind:message="message"/>
     </div>
@@ -18,6 +18,7 @@
 <script lang="ts">
 import { Component, Vue, Watch } from "vue-property-decorator"
 import { Message, User, Guild, Channel } from "../scripts/sdk/Interfaces"
+import { mapGetters } from 'vuex'
 import MessageComp from './MessageComp.vue'
 import MessageSend from './MessageSend.vue'
 
@@ -29,33 +30,9 @@ import MessageSend from './MessageSend.vue'
 })
 export default class MessageColumn extends Vue {
 
-  private notSelected : boolean = true
-  private messages = Array<Message>()
-
-  getGuildName() : string {
-    let a : Guild | undefined = this.$store.state.cache.getGuild(this.$route.params.guildId)
-    if (a == undefined) {
-      this.notSelected = true
-      return "-"
-    }
-    this.notSelected = false
-    return a.name
-  }
-
-  getChannelName() : string {
-    let a : Channel | undefined = this.$store.state.cache.getChannel(this.$route.params.channelId)
-    if (a == undefined) {
-      this.notSelected = true
-      return "-"
-    }
-    this.notSelected = false
-    return a.name
-  }
-
   @Watch('$route', { immediate: true, deep: true })
   onUrlChange(newVal: any) {
     this.$store.dispatch('fetchMessagesForChannel', this.$route.params.channelId)
-    this.messages = this.$store.state.messagesByChannel.get("16")
   }
 }
 </script>

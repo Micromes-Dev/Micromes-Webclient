@@ -1,14 +1,14 @@
 <template>
   <div class="middledark">
     <ChannelComp 
-      v-for="channel in getChannels()"
+      v-for="channel in this.$store.state.currentGuild.channels"
       v-bind:key="channel.guildId"
       v-bind:channel="channel"/>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator"
+import { Component, Vue, Prop } from "vue-property-decorator"
 import { Channel } from '../scripts/sdk/Interfaces'
 import ChannelComp from './ChannelComp.vue'
 
@@ -18,13 +18,6 @@ import ChannelComp from './ChannelComp.vue'
   }
 })
 export default class ChannelColumn extends Vue {
-
-  getChannels() : Array<Channel>{
-    let guild = this.$store.state.cache.getGuild(this.$route.params.guildId)
-    //console.log(guild)
-    let a = this.$store.state.cache.getChannels(guild)
-    return a
-  }
 }
 </script>
 

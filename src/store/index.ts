@@ -1,23 +1,65 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import Cache from '../scripts/sdk/MessengerCache';
-import { Message } from '@/scripts/sdk/Interfaces';
+import { Message, User, Channel, Guild, Status } from '@/scripts/sdk/Interfaces';
 import BackendCommunicator from '@/scripts/sdk/BackendCommunication';
-import { JsonDecoder } from 'ts.data.json';
+import { messageForChannelQuerie } from '@/queries/queries';
 
 Vue.use(Vuex)
 
+interface State {
+  messages: MessagePlus[]
+  me: User
+  be: BackendCommunicator
+  guilds: Guild[]
+  currentGuild: Guild
+}
+
+interface MessagePlus extends Message {
+  channelID: string
+}
+
 export default new Vuex.Store({
   state: {
-    cache: new Cache(),
     be: new BackendCommunicator(),
-    messagesByChannel: new Map<string, Array<Message>>(),
-    checksumByChannel: new Map<string, number>(),
-    me: undefined
+    messages: [{
+      id: "0",
+      content: "nix",
+      channelID: "16",
+      dateTime: "21345",
+      authorID: "1"
+    }],
+    me: {
+      id: "0",
+      name: "-",
+      profilePictureLocation: "http://mtorials.de/logo.png",
+      status: Status.ONLINE
+    },
+    guilds: [{
+      id: "0",
+      name: "Private Channels",
+      channels: [{
+        id: "0",
+        name: "welcome",
+        checksum: 1
+      }],
+      pictureLocation: "http://mtorials.de/logo.png"
+    }],
+    currentGuild: {
+      id: "0",
+      channels: [],
+      name: "-",
+      pictureLocation: 'http://mtorials.de/logo.png'
+    }
   },
   mutations: {
-    saveMessagesForChannel(state: any, payload : { channelID: string, messages: Array<Message> }) {
-      state.messagesByChannel.set(payload.channelID, payload.messages)
+    saveMessagesForChannel(state: State, messages: MessagePlus[]) {
+      state.messages = messages
+    },
+    setMe(state: State, me: User) {
+      state.me = me
+    },
+    setCurrentGuild(state: State, guild: Guild) {
+      state.currentGuild = guild
     }
   },
   actions: {
@@ -26,13 +68,24 @@ export default new Vuex.Store({
     },
     fetchMessagesForChannel(context, channelID: string) {
       this.state.be.getMessagesForChannel(channelID, (response: any) => {
-        console.log(response.messagesForChannel[0])
-        let msgs : Array<Message> = response.messagesForChannel
-        context.commit('saveMessagesForChannel', {
-          channelID: channelID,
-          messages: msgs
-        })
+        let msgs : any[] = response.messagesForChannel
+        msgs.forEach(msg => msg.channelID = channelID)
+        let msgsp : MessagePlus[] = msgs
+        context.commit('saveMessagesForChannel', msgsp)
       })
+    },
+    fetchCurrentUser(context) {
+      this.state.be.getBackendCurrentUser((response: any) => {
+        let me : User = response.me
+        context.commit('setMe', me)
+      })
+    }
+  },
+  getters: {
+    currentMessages: (state: State) : Array<Message> => {
+      let a: any = state.messages
+      console.log(a)
+      return a.filter(msg => msg.channelID == "16")
     }
   }
 })
