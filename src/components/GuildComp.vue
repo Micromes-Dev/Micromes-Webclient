@@ -15,7 +15,6 @@ import { Guild } from '@/scripts/sdk/Interfaces';
 
 @Component({
   components: {
-    Guild,
     ChannelColumn,
     MessageColumn,
     UserColumn

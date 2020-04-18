@@ -51,7 +51,17 @@ export interface User extends Entity{
 export interface Guild extends Entity {
   name: string
   channels: Channel[]
-  pictureLocation: string
+  iconLocation: string
+  
+}
+
+export interface GraphQLGuild extends Guild{
+  owner: User
+  users: User[]
+}
+
+export interface ExtendedGuild extends GraphQLGuild{
+  users: Array<User>
 }
 
 export enum Status{

@@ -1,8 +1,9 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import { Message, User, Channel, Guild, Status } from '@/scripts/sdk/Interfaces';
+import { Message, User, Channel, Guild, Status, ExtendedGuild, GraphQLGuild, PrivateChannel } from '@/scripts/sdk/Interfaces';
 import BackendCommunicator from '@/scripts/sdk/BackendCommunication';
 import { messageForChannelQuerie } from '@/queries/queries';
+import { GraphQLClient } from 'graphql-request';
 
 Vue.use(Vuex)
 
@@ -12,6 +13,8 @@ interface State {
   be: BackendCommunicator
   guilds: Guild[]
   currentGuild: Guild
+  users: Array<User>
+  channelID: String
 }
 
 interface MessagePlus extends Message {
@@ -42,14 +45,16 @@ export default new Vuex.Store({
         name: "welcome",
         checksum: 1
       }],
-      pictureLocation: "http://mtorials.de/logo.png"
+      iconLocation: "http://mtorials.de/logo.png"
     }],
     currentGuild: {
       id: "0",
       channels: [],
       name: "-",
-      pictureLocation: 'http://mtorials.de/logo.png'
-    }
+      iconLocation: 'http://mtorials.de/logo.png'
+    },
+    users: new Array<User>(),
+    channelID: "0"
   },
   mutations: {
     saveMessagesForChannel(state: State, messages: MessagePlus[]) {
@@ -60,6 +65,18 @@ export default new Vuex.Store({
     },
     setCurrentGuild(state: State, guild: Guild) {
       state.currentGuild = guild
+    },
+    setPrivateChannels(state: State, channels: Channel[]) {
+      Vue.set(state.guilds.filter(g => g.id == "0")[0], 'channels', channels)
+    },
+    setGuilds(state: State, guilds: Array<Guild>){
+      state.guilds = guilds
+    },
+    addUser(state: State, user: User){
+      state.users.push(user)
+    },
+    setChannelID(state: State, channelID: String) {
+      state.channelID = channelID
     }
   },
   actions: {
@@ -75,17 +92,33 @@ export default new Vuex.Store({
       })
     },
     fetchCurrentUser(context) {
-      this.state.be.getBackendCurrentUser((response: any) => {
+      this.state.be.getCurrentUser((response: any) => {
         let me : User = response.me
         context.commit('setMe', me)
+      })
+    },
+    fetchGuilds(context){
+      this.state.be.getBasicGuilds((guilds: GraphQLGuild[]) => {
+        console.log(guilds)
+        for (let i in guilds) {
+          for (let j in guilds[i].users) {
+            context.commit('addUser', guilds[i].users[j])
+          }
+        }
+        context.commit('setGuilds', guilds as Guild[])
+      })
+    },
+    fetchPrivateChannels(context) {
+      this.state.be.getPrivateChannels((channels: PrivateChannel) => {
+        context.commit('setPrivateChannels', channels)
       })
     }
   },
   getters: {
     currentMessages: (state: State) : Array<Message> => {
       let a: any = state.messages
-      console.log(a)
-      return a.filter(msg => msg.channelID == "16")
+      console.log(state.channelID)
+      return a.filter((msg: MessagePlus) => msg.channelID == state.channelID)
     }
   }
 })

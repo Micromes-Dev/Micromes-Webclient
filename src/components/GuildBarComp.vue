@@ -3,7 +3,7 @@
     <div class="flex leftright">
       <div class="indicator white" v-if="activated"/>
       <div class="miniindic white" v-if="hover && !activated"/>
-      <img class="pic marg" :src="guild.pictureLocation" :alt="guild.name" @click="redirect" @mouseover="hover = true" @mouseleave="hover = false"/>
+      <img class="pic marg" :src="guild.iconLocation" :alt="guild.name" @click="redirect" @mouseover="hover = true" @mouseleave="hover = false"/>
     </div>
   </a>
 </template>

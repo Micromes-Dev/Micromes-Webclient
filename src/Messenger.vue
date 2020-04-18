@@ -34,8 +34,7 @@ export default class Messenger extends Vue {
   }
 
   created() {
-    //#region set variables
-    var cookie: string | undefined = this.getCookie("micromesJWt");
+        var cookie: string | undefined = this.getCookie("micromesJWt");
     var encodedJWTData = cookie
       ? cookie.substring(cookie.indexOf(".") + 1, cookie.lastIndexOf("."))
       : "";
@@ -44,11 +43,21 @@ export default class Messenger extends Vue {
     //#endregion
 
     this.$store.dispatch('fetchCurrentUser')
+    this.$store.dispatch('fetchGuilds')
+
+    this.$router.push({ path: `/0/0` })
+    this.setup()
+    //this.$store.dispatch('fetchPrivateChannels')
   }
 
   @Watch("$route", { immediate: true, deep: true })
   onURLChange(route: Route) {
+    this.setup()
+  }
+
+  private setup() {
     this.$store.commit('setCurrentGuild', this.$store.state.guilds.filter((guild: Guild) => guild.id == this.$route.params.guildId)[0])
+    this.$store.commit('setChannelID', this.$route.params.channelId)
   }
 }
 </script>
