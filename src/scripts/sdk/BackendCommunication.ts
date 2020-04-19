@@ -5,7 +5,7 @@ const axios = require("axios")
 
 import { GraphQLClient } from 'graphql-request'
 import { messageForChannelQuerie, getMeQuerie, privateChannelsQuerie, guildsQuerie, guildByIdQuerie } from '@/queries/queries'
-import { sendMessages } from '@/queries/mutations'
+import { sendMessages, createGuildChannel } from '@/queries/mutations'
 
 
 export default class BackendCommunicator {
@@ -55,6 +55,14 @@ export default class BackendCommunicator {
     this.graphQLClient?.request(sendMessages, {
       channelID,
       content
+    })
+    .catch((error) => console.log(error))
+  }
+
+  createGuildChannel(name: string, guild: string){
+    this.graphQLClient?.request(createGuildChannel, {
+      guild,
+      name
     })
     .catch((error) => console.log(error))
   }
