@@ -34,7 +34,7 @@ export default class Messenger extends Vue {
   }
 
   created() {
-        var cookie: string | undefined = this.getCookie("micromesJWt");
+    var cookie: string | undefined = this.getCookie("micromesJWt");
     var encodedJWTData = cookie
       ? cookie.substring(cookie.indexOf(".") + 1, cookie.lastIndexOf("."))
       : "";

@@ -1,7 +1,7 @@
 <template>
   <div class="middledark padded updown flex">
     <div class="flexbox fullheight">
-      <user-comp v-for="user in users"
+      <user-comp v-for="user in this.$store.state.currentGuild.users"
         v-bind:key="user.uuid"
         v-bind:user="user"/>
     </div>
@@ -24,25 +24,5 @@ import { User, Status } from '../scripts/sdk/Interfaces'
   }
 })
 export default class UserColumn extends Vue {
-  private users: User[] = [
-    {
-      uuid: "1",
-      status: Status.ONLINE,
-      name: "Universum",
-      profilePictureLocation: "https://mtorials.de/stuff/universeicon0001.png"
-    },
-    {
-      uuid: "2",
-      status: Status.ONLINE,
-      name: "berl",
-      profilePictureLocation: "http://b-erler.de/pic/berl.jpg"
-    },
-    {
-      uuid: "3",
-      status: Status.IDLE,
-      name: "user with a name waaaay toooo long",
-      profilePictureLocation: "https://mtorials.de/stuff/bg1.png"
-    }
-  ]
 }
 </script>

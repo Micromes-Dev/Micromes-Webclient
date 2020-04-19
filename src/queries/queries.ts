@@ -36,7 +36,8 @@ query {
     users {
       id,
       name,
-      profilePictureLocation
+      profilePictureLocation,
+      status
     }
   }
 }`

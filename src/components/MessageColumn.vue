@@ -1,7 +1,7 @@
 <template>
   <div class="flex updown dark">
     <div class="flexbox middledark padded">
-      {{ this.$store.state.currentGuild.name }}
+      {{ this.$store.state.currentGuild.name }} # {{ this.$store.state.currentGuild.id }}/{{ this.$store.state.channelID }}
     </div>
     <div class="flexbox fullheight padded">
       <message-comp
